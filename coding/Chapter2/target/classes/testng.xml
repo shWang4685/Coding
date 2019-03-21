@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<suite name="这是我们自己的测试文件">
+    <test name="这是测试模块">
+        <classes>
+
+            <class name="TestMethods">
+                <include>test1</include>
+                <include>test2</include>
+                <include>test3</include>
+                <include>test4</include>
+            </class>
+        </classes>
+    </test>
+    <listeners>
+       <!-- <listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter"></listener> -->
+        <listener class-name="listener.ExtentTestNGIReporterListener"></listener>
+    </listeners>
+</suite>
