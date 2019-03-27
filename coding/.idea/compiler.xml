@@ -9,13 +9,15 @@
         <module name="Chapter1" />
         <module name="Chapter2" />
         <module name="HttpClient" />
+        <module name="SpringBootDemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Chapter1" target="1.5" />
-      <module name="Chapter2" target="1.5" />
-      <module name="coding" target="1.5" />
-      <module name="HttpClient" target="1.5" />
+      <module name="Chapter1" target="1.8" />
+      <module name="Chapter2" target="1.8" />
+      <module name="coding" target="1.8" />
+      <module name="HttpClient" target="1.8" />
+      <module name="SpringBootDemo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
