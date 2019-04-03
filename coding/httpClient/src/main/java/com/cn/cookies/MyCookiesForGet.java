@@ -65,7 +65,7 @@ public class MyCookiesForGet {
         HttpGet get=new HttpGet(url);
         DefaultHttpClient client=new DefaultHttpClient();
         //将getCookies接口的响应cookie set到本次访问
-        client.setCookieStore(this.store);
+            client.setCookieStore(this.store);
         //提交请求，获得响应
         HttpResponse response=client.execute(get);
         //获得请求响应码

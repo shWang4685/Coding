@@ -40,6 +40,7 @@ public class MyCookiesForPost {
         String responseStr=EntityUtils.toString(response.getEntity(),"utf-8");
         //获得返回的cookie信息
         this.store=client.getCookieStore();
+
     }
 
     @Test(dependsOnMethods = {"getCookies"})

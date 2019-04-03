@@ -19,6 +19,10 @@
         <module>Chapter2</module>
         <module>httpClient</module>
         <module>SpringBootDemo</module>
+        <module>MyBatis</module>
+        <module>SpringBoot_MyBatis</module>
+        <module>School</module>
+        <module>NewMyBatis</module>
     </modules>
     <!-- TestNG-->
     <dependencies>

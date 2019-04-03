@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.course">
+    <select id="getUserCount" resultType="Integer">
+        select count(*) from class_tbl;
+    </select>
+    
+    <insert id="addClass" parameterType="com.course.model.SchoolClass">
+        insert into class_tbl (class_id,class_name, class_teacher)
+        values(#{class_id},#{class_name},#{class_teacher})
+    </insert>
+</mapper>
