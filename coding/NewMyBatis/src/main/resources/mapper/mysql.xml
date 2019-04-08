@@ -12,4 +12,12 @@
         insert into class_tbl (class_id,class_name, class_teacher)
         values(#{class_id},#{class_name},#{class_teacher})
     </insert>
+
+    <update id="updataClass" parameterType="com.course.model.SchoolClass">
+        update class_tbl set class_name=#{class_name} where class_id=#{class_id}
+    </update>
+
+    <delete id="deleteClass" parameterType="Integer">
+        delete from class_tbl where class_id=#{id}
+    </delete>
 </mapper>

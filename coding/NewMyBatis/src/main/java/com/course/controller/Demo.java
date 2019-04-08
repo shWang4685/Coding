@@ -15,18 +15,27 @@ public class Demo {
     //首先获取一个执行sql语句的对象
     @Autowired
     private SqlSessionTemplate template;
-
     @RequestMapping(value = "/getUserCount",method = RequestMethod.GET)
     @ApiOperation(value = "可以获取到用户数",httpMethod = "GET")
     public int getUserCount(){
-       return template.selectOne("getUserCount");
+        return template.selectOne("getUserCount");
     }
 
     @RequestMapping(value = "/addClass",method = RequestMethod.POST)
     @ApiOperation(value = "向数据表class_tbl中添加数据",httpMethod = "POST")
     public int addClass(@RequestBody SchoolClass schoolClass){
-
         return template.insert("addClass",schoolClass);
     }
 
+    @RequestMapping(value = "/updataClass",method = RequestMethod.POST)
+    @ApiOperation(value = "修改班级信息",httpMethod = "POST")
+    public int updataClass(@RequestBody SchoolClass schoolClass){
+        return  template.update("updataClass",schoolClass);
+    }
+
+    @RequestMapping(value = "/deleteClass",method = RequestMethod.GET)
+    @ApiOperation(value = "删除班级信息",httpMethod = "GET")
+    public int deleteClass(@RequestParam int id){
+        return  template.delete("deleteClass",id);
+    }
 }
