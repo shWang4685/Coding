@@ -11,13 +11,14 @@
         <module name="Chapter2" />
         <module name="HttpClient" />
         <module name="NewMyBatis" />
-        <module name="School" />
+        <module name="SpringBootDemo" />
+        <module name="TestDemo" />
       </profile>
       <profile name="Annotation profile for coding" enabled="true">
-        <sourceOutputDir name="../School/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../School/target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="../SpringBootDemo/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../SpringBootDemo/target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SpringBootDemo" />
+        <module name="School" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +31,7 @@
       <module name="School" target="1.8" />
       <module name="SpringBoot_MyBatis" target="1.8" />
       <module name="SpringBootDemo" target="1.8" />
+      <module name="TestDemo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
