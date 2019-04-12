@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.Reader;
 
-public class DataBaseUtil {
+public class DatabaseUtil {
     public static SqlSession getSqlSession() throws IOException {
         //获取资源文件
         Reader reader=Resources.getResourceAsReader("databaseConfig.xml");

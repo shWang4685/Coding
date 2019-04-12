@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="course.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="course.entity.User">
+        <id column="user_id"  property="id" jdbcType="INTEGER"/>
+        <id column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <id column="user_password" property="password" jdbcType="VARCHAR"/>
+        <id column="user_age"  property="age" jdbcType="INTEGER"/>
+        <id column="user_sex" property="sex" jdbcType="VARCHAR"/>
+        <id column="user_permission" property="permission" jdbcType="VARCHAR"/>
+        <id column="user_isDelete" property="isDelete" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_list">
+        user_id,user_name,user_password,user_age,user_sex,user_permission,user_isDelete
+    </sql>
+    <!--根据id删除某数据-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+      delete  from user_tbl where user_id=#{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="course.entity.User">
+        insert into user_tbl (user_id,user_name,user_password,user_age,user_sex,user_permission,user_isDelete)
+        values (#{id,jdbc=INTEGER},#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{age,jdbc=INTEGER},
+        #{sex,jdbcType=VARCHAR},#{permission,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR})
+    </insert>
+    <!--  查询所有用户-->
+    <select id="getAllUser"   resultMap="BaseResultMap">
+          select
+        <include refid="Base_Column_List"/>
+          from  user_tbl
+    </select>
+
+
+</mapper>

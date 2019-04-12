@@ -11,27 +11,27 @@
         <module name="Chapter2" />
         <module name="HttpClient" />
         <module name="NewMyBatis" />
+        <module name="springboot-mybatis-demo" />
+        <module name="springboot2-mybatis-demo" />
         <module name="SpringBootDemo" />
         <module name="TestDemo" />
-      </profile>
-      <profile name="Annotation profile for coding" enabled="true">
-        <sourceOutputDir name="../SpringBootDemo/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../SpringBootDemo/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="School" />
+        <module name="UserManager" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Chapter1" target="1.8" />
-      <module name="Chapter2" target="1.8" />
-      <module name="coding" target="1.8" />
-      <module name="HttpClient" target="1.8" />
+      <module name="Chapter1" target="1.6" />
+      <module name="Chapter2" target="1.6" />
+      <module name="coding" target="1.6" />
+      <module name="HttpClient" target="1.6" />
       <module name="MyBatis" target="1.8" />
-      <module name="NewMyBatis" target="1.8" />
+      <module name="NewMyBatis" target="1.6" />
       <module name="School" target="1.8" />
+      <module name="springboot-mybatis-demo" target="1.8" />
+      <module name="springboot2-mybatis-demo" target="1.8" />
       <module name="SpringBoot_MyBatis" target="1.8" />
-      <module name="SpringBootDemo" target="1.8" />
-      <module name="TestDemo" target="1.8" />
+      <module name="SpringBootDemo" target="1.6" />
+      <module name="TestDemo" target="1.6" />
+      <module name="UserManager" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
