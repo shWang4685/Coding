@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.AttPersonnelDao">
+    <resultMap id="BaseResultMap" type="com.entity.AttPersonnel">
+        <id column="personnel_jobId" jdbcType="INTEGER" property="personnel_jobId" />
+        <id column="personnel_password" jdbcType="VARCHAR" property="personnel_password" />
+        <id column="personnel_name" jdbcType="VARCHAR" property="personnel_name" />
+        <id column="personnel_sex" jdbcType="VARCHAR" property="personnel_sex" />
+        <id column="personnel_email" jdbcType="VARCHAR" property="personnel_email" />
+        <id column="personnel_groupId" jdbcType="INTEGER" property="personnel_groupId" />
+        <id column="personnel_dept_id" jdbcType="INTEGER" property="personnel_dept_id" />
+        <id column="personnel_title" jdbcType="VARCHAR" property="personnel_title" />
+        <id column="personnel_entryTime" jdbcType="VARCHAR" property="personnel_entryTime" />
+        <id column="personnel_regularWorkerTime" jdbcType="VARCHAR" property="personnel_regularWorkerTime" />
+        <id column="personnel_mobile" jdbcType="VARCHAR" property="personnel_mobile" />
+        <id column="personnel_remark" jdbcType="VARCHAR" property="personnel_remark" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    personnel_jobId, personnel_password, personnel_name,personnel_sex,personnel_email,personnel_groupId,personnel_dept_id,personnel_title,personnel_entryTime,personnel_regularWorkerTime,personnel_mobile,personnel_remark
+    </sql>
+    <!--用户表名称-->
+    <sql id="table_att_personnel">
+      att_personnel
+    </sql>
+    <!--  查询所有用户-->
+    <select id="getAllAttPersonnel"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from  att_personnel
+    </select>
+    <!-- 插入数据之后返回主键 -->
+    <insert id="insertAttPer" useGeneratedKeys="true" keyProperty="personnel_jobId" parameterType="com.entity.AttPersonnel">
+         INSERT INTO
+        <include refid="table_att_personnel"/>
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="personnel_password != null">
+                personnel_password,
+            </if>
+            <if test="personnel_name != null">
+                personnel_name,
+            </if>
+            <if test="personnel_sex != null">
+                personnel_sex,
+             </if>
+            <if test="personnel_email != null">
+                personnel_email,
+            </if>
+            <if test="personnel_groupId != null">
+                personnel_groupId,
+            </if>
+            <if test="personnel_dept_id != null">
+                 personnel_dept_id,
+            </if>
+            <if test="personnel_title != null">
+                personnel_title,
+            </if>
+            <if test="personnel_entryTime != null">
+                personnel_entryTime,
+            </if>
+            <if test="personnel_regularWorkerTime != null">
+                personnel_regularWorkerTime,
+            </if>
+            <if test="personnel_mobile != null">
+                personnel_mobile,
+            </if>
+            <if test="personnel_remark != null">
+                personnel_remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="personnel_password != null">
+                #{personnel_password,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_name != null">
+                #{personnel_name,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_sex != null">
+                #{personnel_sex,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_email != null">
+                #{personnel_email,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_groupId != null">
+                #{personnel_groupId,jdbcType=INTEGER},
+            </if>
+            <if test="personnel_dept_id != null">
+                #{personnel_dept_id,jdbcType=INTEGER},
+            </if>
+            <if test="personnel_title != null">
+                #{personnel_title,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_entryTime != null">
+                #{personnel_entryTime,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_regularWorkerTime != null">
+                #{personnel_regularWorkerTime,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_mobile != null">
+                #{personnel_mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="personnel_remark != null">
+                #{personnel_remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>
