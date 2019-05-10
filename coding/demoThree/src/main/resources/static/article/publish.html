@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+type="text/javascript"
+src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/article/change_input.js"></script>
+<script src="/js/article/publish.js"></script>
+<meta charset="UTF-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>发表文章</title>
+<style type="text/css">
+input[type='text'] {
+	width: 100px;
+	height: 30px;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+	<p>
+		标题:<input class="inputTitle" value="" type="text" />
+	</p>
+	
+	<!-- js响应"内容"输入框变大事件:src="/js/article/change_input.js" -->
+	<p>
+		内容:<input class="inputContent"  value="" type="text_content" />
+	</p>
+	
+	<!-- js响应"发表"事件:src="/js/article/publish.js" -->
+	<p>
+		<button type="button" id="publish" >发表</button>
+	</p>
+</body>
+</html>

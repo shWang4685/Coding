@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sqxinxibu.neikanhoutai.dao.LoginTicketDao" >
+    <!--column:数据库字段名;property:实体类属性-->
+    <resultMap id="BaseResultMap" type="com.sqxinxibu.neikanhoutai.entity.LoginTicket" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="expired" property="expired" jdbcType="DATE" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="ticket" property="ticket" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id,expired,status, ticket
+    </sql>
+    <insert id="insertLoginticket" parameterType="com.sqxinxibu.neikanhoutai.entity.LoginTicket" >
+        insert into login_ticket (id, user_id, expired,
+        status,ticket)
+        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{expired,jdbcType=DATE},
+        #{status,jdbcType=INTEGER},
+        #{ticket,jdbcType=VARCHAR})
+    </insert>
+    <select id="chaxunByticket" resultMap="BaseResultMap"  parameterType="java.lang.String" >
+        select *
+        from login_ticket
+        where ticket = #{ticket,jdbcType=VARCHAR}
+    </select>
+    <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+        <!--select *-->
+        <!--from login_ticket-->
+        <!--where user_id = #{id,jdbcType=INTEGER}-->
+    <!--</select>-->
+
+</mapper>

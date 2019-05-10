@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>  
+<script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css" />    
+<meta charset="UTF-8" />
+<title>数据库中的文件夹路径页面</title>
+</head>
+<body>
+
+	<!-- begin:显示全部文件夹功能 -->
+	<a th:href="@{/showAllFolder} ">显示全部文件夹</a>
+	<h1>   </h1>
+	<!-- begin:返回主页功能
+	<a th:href="@{/mkdirs} ">返回主页</a>		
+	 -->
+	<h1 th:text="显示刚才创建的文件夹" align="center"></h1>
+	<table class="table table-hover">
+		<tr>
+			<th>id</th>
+			<th>folder</th>
+			<th>功能</th>
+		</tr>
+		
+		<tr th:each="lFolder : ${session.lFolder}">
+		
+			<td th:text="${lFolder.id}"></td>
+			<td th:text="${lFolder.folder}"></td>
+            <td> 
+            	<a th:href="@{/uploadTwo?(id=${lFolder.id})}">上传文件</a>
+            </td>
+            
+		</tr>
+	</table>
+	
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>login</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<script type="text/javascript" th:src="@{js/login.js}"></script>
+		<script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
+		<link rel="stylesheet" th:href="@{css/style.css}"/>
+
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="top_content">
+					<div id="header">
+						<div id="rightheader">
+						</div>
+						<div id="topheader">
+							<h1 id="title">
+								<a href="#">文思海辉</a>
+							</h1>
+						</div>
+						<div id="navigation">
+						</div>
+					</div>
+				<div id="content">
+					<p id="whereami" >
+					</p>
+					<h1 style="margin-left: 315px;">
+						login
+					</h1>
+
+						<table cellpadding="0" cellspacing="0" border="0"
+							class="form_table" style="margin-left: 180px;">
+							<tr>
+								<td valign="middle" align="right">
+									username:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="name" id="inputName"/>
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									password:
+								</td>
+								<td valign="middle" align="left">
+									<input type="password" class="inputgri" name="pwd" id="inputPass" />
+								</td>
+							</tr>
+						</table>
+						<p>
+							<input type="button" onclick="actionCheck();"  class="loginBtn" value="Submit &raquo;" style="margin-left: 320px;"/>
+						</p>
+				</div>
+			</div>
+			<div id="footer">
+				<div id="footer_bg">
+					ABC@126.com
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主页</title>
+</head>
+<body>
+	<p th:text="${session.errFolder}"></p>
+	<p th:text="${session.mkdirsErr}"></p>
+	<form id="iform" th:action="@{/mkdirsGo}" th:method="post" >  
+        <input type="text"   name="folder" placeholder="创建多层文件夹格式:A/B/C" /> 
+		<input type="submit" value="创建"/> 
+    </form>
+    
+    <h1>   </h1>
+    
+    <!-- begin:显示全部文件夹功能 -->
+	<a th:href="@{/showAllFolder} ">显示全部文件夹</a>
+	
+			
+	
+</body>
+</html>

@@ -7,7 +7,6 @@ public class ResponsePram {
         super();
         this.desc = desc;
         this.resultCode = resultCode;
-
     }
 
     public ResponsePram(){

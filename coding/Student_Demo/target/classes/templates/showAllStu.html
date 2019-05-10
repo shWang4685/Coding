@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>显示所有student信息</title>
+</head>
+<body>
+<p1>学生信息管理系统</p1>&nbsp;&nbsp;
+<a th:href="@{/student/insertStu}">添加学生信息</a>
+<a th:href="@{/student/selectStu}">查询学生信息</a>
+	<table width="50%" border=1>
+	<tr>
+		<td>ID编号</td>
+		<td>姓名</td>
+		<td>性别</td>
+		<td>班级</td>
+		<td>年龄</td>
+		<td>操作选项</td>
+	</tr>
+	<tr th:each="student : ${pageinfo.list}">
+		<td th:text="${student.id}"></td>
+		<td th:text="${student.name}"></td>
+		<td th:text="${student.sex}"></td>
+		<td th:text="${student.classname}"></td>
+		<td th:text="${student.age}"></td>
+		<td><a th:href="@{/student/updateStu(id=${student.id})}">修改</a>
+			<a th:href="@{/student/deleteStu(id=${student.id})}">删除</a>
+		</td>
+	</tr>
+
+</table>
+	当前是第<span th:text="${pageinfo.FirstPage}"></span>页    &nbsp; 
+
+<a th:href="@{/student/SelectAllStu(page=${pageinfo.prePage})}">上一页</a>
+
+总共<span th:text="${pageinfo.Pages}"></span>页
+
+<a th:href="@{/student/SelectAllStu(page=${pageinfo.nextPage})}">下一页</a>
+	
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.CompanyUserDao">
+    <resultMap id="BaseResultMap" type="com.entity.CompanyUser">
+        <id column="user_id" jdbcType="INTEGER" property="user_id" />
+        <id column="user_account" jdbcType="VARCHAR" property="user_account" />
+        <id column="user_password" jdbcType="VARCHAR" property="user_password" />
+        <id column="user_name" jdbcType="VARCHAR" property="user_name" />
+        <id column="user_TM" jdbcType="VARCHAR" property="user_TM" />
+        <id column="user_TL" jdbcType="VARCHAR" property="user_TL" />
+        <id column="user_permission" jdbcType="INTEGER" property="user_permission" />
+    </resultMap>
+    <sql id="Base_Column_List">user_id,user_account,user_password,user_name,user_TM,user_TL,user_permission
+    </sql>
+    <!--  查询是否有用户名为x-->
+    <select id="checkUser"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_user where user_account=#{user_account}
+    </select>
+    <!--  查询是否有用户名和秘密正确性-->
+    <select id="checkLogin"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_user where user_account=#{user_account} and user_password=#{user_password}
+    </select>
+
+</mapper>

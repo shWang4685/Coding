@@ -1,0 +1,39 @@
+1、清空数据库中的时间为默认值时候失败
+清空功能的代码：
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		//问题在于这一句，我以为意思是：选定数据库中不为空的字段
+		criteria.andAllowTimeIsNotNull();
+		//然后执行这一句代码的时候，
+		userMapper.updateByExampleSelective(record, example)
+	
+	<update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.allowTime != null">	
+        allow_time = #{record.allowTime,jdbcType=TIMESTAMP},  //这一句执行失败
+      </if>
+    </set>
+    
+  </update>
+	
+	
+	后来我看了一下Criteria的返回值，发现是这样子的，所以传到mapper.xml实现时候
+	传过去的record.allowTime值是"allow_time is not null"，导致赋值时候报错，所以执行失败！
+	
+	 public Criteria andAllowTimeIsNotNull() {
+            addCriterion("allow_time is not null");
+            return (Criteria) this;
+        }
+    
+     protected void addCriterion(String condition) {
+            if (condition == null) {
+                throw new RuntimeException("Value for condition cannot be null");
+            }
+            criteria.add(new Criterion(condition));
+        }
+        
+        
+        
+2、mapper.xml的返回值int意思是修改了多少个字段，0就是没有修改
+    

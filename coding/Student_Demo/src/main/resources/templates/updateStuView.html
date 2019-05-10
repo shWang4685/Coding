@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/student/doupdateStu}" method="post"> 
+
+<table width="50%" border=1>
+	<tr>
+		<td>ID编号</td>
+		<td>姓名</td>
+		<td>性别</td>
+		<td>班级</td>
+		<td>年龄</td>
+	</tr> 
+	<tr>
+		<td><input type="text" name="id" th:value="*{student.id}"/></td>
+		<td><input type="text" name="name" th:value="*{student.name}"/></td>
+		<td><input type="text" name="sex" th:value="*{student.sex}"/></td>
+		<td><input type="text" name="classname" th:value="*{student.classname}"/></td>
+		<td><input type="text" name="age" th:value="*{student.age}"/></td>
+		<td><input type="submit" value="确认修改"/></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

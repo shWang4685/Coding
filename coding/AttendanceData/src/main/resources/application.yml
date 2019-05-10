@@ -14,7 +14,9 @@ spring:
        url: jdbc:mysql://localhost:3307/ssm
        username: admin
        password: scott
-
+   thymeleaf:
+     cache: false
+     content-type: text/html
 mybatis:
     type-aliases-package: com.entity
     mapper-locations:

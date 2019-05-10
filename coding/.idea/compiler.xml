@@ -10,11 +10,14 @@
         <module name="AttendanceData" />
         <module name="Chapter1" />
         <module name="Chapter2" />
+        <module name="demoThree" />
         <module name="HttpClient" />
         <module name="NewMyBatis" />
+        <module name="spring13" />
         <module name="springboot-mybatis-demo" />
         <module name="springboot2-mybatis-demo" />
         <module name="SpringBootDemo" />
+        <module name="student_demo" />
         <module name="TestDemo" />
         <module name="UserManager" />
       </profile>
@@ -24,14 +27,17 @@
       <module name="Chapter1" target="1.6" />
       <module name="Chapter2" target="1.6" />
       <module name="coding" target="1.6" />
+      <module name="demoThree" target="1.8" />
       <module name="HttpClient" target="1.6" />
       <module name="MyBatis" target="1.8" />
       <module name="NewMyBatis" target="1.6" />
       <module name="School" target="1.8" />
+      <module name="spring13" target="1.8" />
       <module name="springboot-mybatis-demo" target="1.8" />
       <module name="springboot2-mybatis-demo" target="1.8" />
       <module name="SpringBoot_MyBatis" target="1.8" />
       <module name="SpringBootDemo" target="1.6" />
+      <module name="student_demo" target="1.8" />
       <module name="TestDemo" target="1.6" />
       <module name="UserManager" target="1.6" />
     </bytecodeTargetLevel>

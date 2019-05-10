@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>多次上传文件</title>
+</head>
+<body>
+	<p th:text="${session.uploadTwoErr}"></p>
+	<p th:text="${session.loadErr}"></p>
+	<form id="uploadFormTwo" enctype="multipart/form-data" th:action="@{/loadPathTwo}" th:method="post">
+		<input id="file" type="file" name="file" multiple="multiple"/> 
+	   	<input type="submit" value="上传"/> 
+	</form>
+	<h1>   </h1>
+	<!-- begin:显示全部文件夹功能 -->
+	<a th:href="@{/showAllFolder} ">显示全部文件夹</a>
+	<h1>   </h1>
+</body>
+</html>

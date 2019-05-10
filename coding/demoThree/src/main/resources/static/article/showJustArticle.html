@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>显示刚才发表的文章</title>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/common/bootstrap.min.js"></script>
+<script src="/js/comment/comment.js"></script>
+<script src="/js/article/change_input.js"></script>
+<style type="text/css">
+input[type='text'] {
+	width: 100px;
+	height: 30px;
+	border-radius: 5px;
+}
+</style>
+<script type="text/javascript">
+  /**
+   * 获取参数的键值对对象。
+   * @returns {Object}
+   */
+   //保存刚才的值的数组，全局变量
+   var save = {};
+   var getParam = function () {
+       try{
+    	   	//遍历获得刚刚传过来的值
+			var url = decodeURI(location.href);
+			var result = url.split("?")[1];
+			var keyValue = result.split("&");
+			var obj = {};
+			for (var i = 0; i < keyValue.length; i++) {
+				var item = keyValue[i].split("=");
+				obj[item[0]] = item[1];
+				save[i] = obj[item[0]];
+			}
+			
+			//把值拼接到html中
+			$('#id').text("id：" + save[0]);
+			$('#title').text("标题：" + save[1]);
+			$('#content').text("内容：" + save[2]);
+			$('#userId').text("userId：" + save[3]);
+			return obj;
+		} catch (e) {
+			console.warn("There has no param value!");
+		}
+	};
+	
+	/**
+	 * 页面加载完毕打印键值对对象
+	 */
+	window.onload = function() {
+		//控制台打印传来的值
+		console.log(getParam());
+	}
+</script>
+</head>
+<body>
+	<div id="id" class="idArticle"></div>
+	<p></p>
+	<div id="title" class="titleArticle"></div>
+	<p></p>
+	<div id="content" class="contentArticle"></div>
+	<p></p>
+	<div id="userId" class="userIdArticle"></div>
+
+	<p></p><p></p>
+	<p>
+		<input class="inputComment"  type="text_content"  placeholder="评论..."/>
+		<button type="button" id="comment" >发表评论</button>
+	</p>
+
+	<!-- 显示主评论 -->
+	<div class="comment-list">
+
+	</div>
+</body>
+</html>

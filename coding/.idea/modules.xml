@@ -11,8 +11,11 @@
       <module fileurl="file://$PROJECT_DIR$/TestDemo/TestDemo.iml" filepath="$PROJECT_DIR$/TestDemo/TestDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserManager/UserManager.iml" filepath="$PROJECT_DIR$/UserManager/UserManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/coding.iml" filepath="$PROJECT_DIR$/coding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demoThree/demoThree.iml" filepath="$PROJECT_DIR$/demoThree/demoThree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-13/spring13.iml" filepath="$PROJECT_DIR$/spring-boot-13/spring13.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-mybatis-demo/springboot-mybatis-demo.iml" filepath="$PROJECT_DIR$/springboot-mybatis-demo/springboot-mybatis-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot2-mybatis-demo/springboot2-mybatis-demo.iml" filepath="$PROJECT_DIR$/springboot2-mybatis-demo/springboot2-mybatis-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Student_Demo/student_demo.iml" filepath="$PROJECT_DIR$/Student_Demo/student_demo.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>  
+<script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css" />    
+<meta charset="UTF-8" />
+<title>数据库中的文件夹路径页面</title>
+</head>
+<body>
+
+	
+	<p th:text="${session.errFolder}"></p>
+	<p th:text="${session.mkdirsErr}"></p>
+	<form id="iform" th:action="@{/mkdirsGo}" th:method="post" >  
+        <input type="text"   name="folder" placeholder="创建多层文件夹格式:A/B/C" /> 
+		<input type="submit" value="创建文件夹"/> 
+    </form>
+	<h1>   </h1>
+	
+	<!-- begin:返回主页功能 
+	<a th:href="@{/mkdirs} ">返回主页</a>		
+	-->
+	<h1>   </h1>
+	
+		
+	<form  th:action="@{/findByName}" th:method="post" >  
+        <input type="text"   name="filename" placeholder="请输入文件名" /> 
+		<input type="submit" value="搜索"/> 
+    </form>
+    
+    
+    <h1 th:text="显示全部文件夹" align="center"></h1>
+	<table class="table table-hover">
+		<tr>
+			<th>id</th>
+			<th>folder</th>
+			<th>功能一</th>
+			<th>功能二</th>
+		</tr>
+		<tr th:each="lFolder : ${session.lFolders}">
+		
+			<td th:text="${lFolder.id}"></td>
+			<td th:text="${lFolder.folder}"></td>
+            <td> 
+            	<a th:href="@{/uploadTwo?(id=${lFolder.id})}">上传</a>
+            </td>
+            
+            <td> 
+            	<a th:href="@{/queryFolder?(id=${lFolder.id})}">查看</a>
+            </td>
+           
+		</tr>
+	</table>
+</body>
+</html>

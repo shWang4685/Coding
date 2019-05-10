@@ -1,0 +1,88 @@
+<!DOCTYPE html >
+
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title>emplist</title>
+		<link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}"/>
+		<link rel="stylesheet" th:href="@{css/emsList.css}"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="top_content"> 
+				<div id="header">
+					<div id="rightheader">
+						
+					</div>
+					<div id="topheader">
+						<h1 id="title">
+							<a href="#">文思海辉</a>
+						</h1>
+					</div>
+					<div id="navigation">
+					</div>
+				</div>
+				<div id="content">
+					<p id="whereami">
+					</p>
+					<h1>
+						Welcome!
+					</h1>
+					<!--/*@thymesVar id="user" type="com.entity.User"*/-->
+					<table class="table">
+						<tr class="table_header">
+							<td>
+								ID
+							</td>
+							<td>
+								Name
+							</td>
+							<td>
+								Salary
+							</td>
+							<td>
+								Age
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+							<td>
+								Operation
+							</td>
+						</tr>
+						<tr class="row1" th:each="user:${users}">
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.age}"></td>
+						</tr>
+
+					</table>
+
+				</div>
+			</div>
+			<div id="footer">
+				<div id="footer_bg">
+				ABC@126.com
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
