@@ -23,9 +23,23 @@ public class PageController {
      */
     @RequestMapping("/{page}")
     public String showInfo(@PathVariable String page){
-        return page;
+        String goPage=null;
+        String[] pageList={"emplist","login"};
+        for(String str:pageList){
+            if(page.equals(str.toString().trim())){
+                goPage=page;
+                break;
+            }else {
+                goPage="login";
+            }
+        }
+        return goPage;
     }
-
+//    @RequestMapping(value = "/login")
+//    public String login(){
+//        System.out.println("到这里来了：");
+//        return "login";
+//    }
 
     @RequestMapping(value = "/indexList",method = RequestMethod.POST)
     @ResponseBody
@@ -54,8 +68,9 @@ public class PageController {
 
     @RequestMapping(value = "/getAllEmp",method = RequestMethod.POST)
     public String  getAllEmp(HttpServletRequest request, HttpServletResponse response){
-        //CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
-        //System.out.println("s--------l:"+user.toString());
+        CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
+        System.out.println("s--------l:"+user.toString());
+
         return "emplist";
     }
 }

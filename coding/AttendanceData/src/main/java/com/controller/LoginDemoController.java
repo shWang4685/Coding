@@ -1,5 +1,4 @@
 package com.controller;
-
 import com.assist.ErrEnum;
 import com.assist.Msg;
 import com.entity.CompanyUser;
@@ -18,9 +17,8 @@ import java.util.List;
 public class LoginDemoController {
     @Autowired
     private CompanyUserService companyUserService;
-
     @RequestMapping(value = "/logindemo",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
-    @CrossOrigin(origins ="http://localhost:8888")
+    //@CrossOrigin(origins ="http://localhost:8888")
     public Msg checkLogin(@RequestBody String parms, HttpServletRequest request, HttpServletResponse response){
         //判断是否有该用户名称
         System.out.println("进来了");
