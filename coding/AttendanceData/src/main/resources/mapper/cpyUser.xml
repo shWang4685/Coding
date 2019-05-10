@@ -19,13 +19,19 @@
     <select id="checkUser"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
         *
-        from  cpy_user where user_account=#{user_account}
+        from  cpy_user where user_account=#{user_account};
     </select>
     <!--  查询是否有用户名和秘密正确性-->
     <select id="checkLogin"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
         *
-        from  cpy_user where user_account=#{user_account} and user_password=#{user_password}
+        from  cpy_user where user_account=#{user_account} and user_password=#{user_password};
+    </select>
+    <!--  查询是否有用户名和秘密正确性-->
+    <select id="selectCompanyUserByUserId"  resultMap="BaseResultMap" parameterType="Integer">
+        select
+        *
+        from  cpy_user where user_id=#{user_id}
     </select>
 
 </mapper>

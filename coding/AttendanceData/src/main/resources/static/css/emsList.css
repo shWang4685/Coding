@@ -10,9 +10,9 @@
 	}
 
 	#wrap {
-		width: 1500px;
+		width: 1800px;
 		margin: 0 auto;
-		background: url(../img/bg.gif) top center repeat-y #FFFFFF;
+
 	}
 
 	#top_content {
@@ -133,7 +133,7 @@
 	}
 
 	#footer {
-		background: url(../img/footer.gif) no-repeat center bottom ;
+
 		color: #FFFFFF;
 		padding: 0 10px 13px 10px;
 
@@ -174,8 +174,10 @@
 		width: 100%;
 		border-collapse: collapse;
 	}
+	.table_header{
+		background-color: skyblue;
+	}
 	.table_header td {
-		background: url(../img/tableheader-bg.gif) no-repeat left top;
 		padding: 5px 10px;
 		color: rgb(70,122,167);
 		border-top: 1px solid #CBD6DE;

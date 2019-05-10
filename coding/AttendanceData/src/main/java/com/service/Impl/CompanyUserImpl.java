@@ -25,7 +25,8 @@ public class CompanyUserImpl implements CompanyUserService {
         System.out.println("lineArray:"+lineArray);
         HashMap parseMap = JSON.parseObject(lineArray,HashMap.class);
         List<CompanyUser> singleOrderList = JSON.parseArray(JSON.parseObject(lineArray).getString("CompanyUser"),CompanyUser.class);
+        System.out.println(singleOrderList.get(0).toString());
 
-        return companyUserDao.checkUser(singleOrderList.get(0));
+        return companyUserDao.checkLogin(singleOrderList.get(0));
     }
 }

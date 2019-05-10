@@ -17,7 +17,7 @@
 					</div>
 					<div id="topheader">
 						<h1 id="title">
-							<a href="#">文思海辉</a>
+							<a href="#">文思海辉-优化一组</a>
 						</h1>
 					</div>
 					<div id="navigation">
@@ -32,46 +32,110 @@
 					<!--/*@thymesVar id="user" type="com.entity.User"*/-->
 					<table class="table">
 						<tr class="table_header">
-							<td>
-								ID
+							<td style="width: 50px">
+								姓名
 							</td>
 							<td>
-								Name
+								评级
 							</td>
 							<td>
-								Salary
+								个人总分
 							</td>
 							<td>
-								Age
+								TM评分
 							</td>
 							<td>
-								Operation
+								TL评分
 							</td>
 							<td>
-								Operation
+								全勤(3)
 							</td>
 							<td>
-								Operation
+								讲师(3-5)
 							</td>
 							<td>
-								Operation
+								无漏测(3)
 							</td>
 							<td>
-								Operation
+								个人有效BUG数大于等于3(3)
 							</td>
 							<td>
-								Operation
+								个人有效BUG数排名第一奖励(5)
 							</td>
 							<td>
-								Operation
+								对项目有较大贡献（1-15）
 							</td>
 							<td>
-								Operation
+								客户表扬 （1-20）
 							</td>
+							<td>
+								个人迟到数大于3（-3）
+							</td>
+							<td>
+								个人有效BUG数小于(-3)
+							</td>
+							<td>
+								BUG漏测
+								（-3-10）
+							</td>
+							<td>
+								客户投诉
+								（-3-20）
+							</td>
+							<td>
+								信息安全
+								（-30）
+							</td>
+							<td>
+								1-3月个人有效BUG总数
+							</td>
+							<td>
+								1-3月工作日
+							</td>
+							<td>
+								个人日均有效BUG数
+							</td>
+							<td>
+								个人迟到次数
+							</td>
+							<td>
+								是否漏测
+							</td>
+							<td>
+								备注（特殊项加分/扣分）说明
+							</td>
+
 						</tr>
-						<tr class="row1" th:each="user:${users}">
-							<td th:text="${user.name}"></td>
-							<td th:text="${user.age}"></td>
+						<tr class="row1" th:each="performanceInfo:${performanceInfos}">
+							<td th:text="${performanceInfo.pfe_user_name}"></td>
+							<td th:text="${performanceInfo.pfe_rating}"></td>
+							<td th:text="${performanceInfo.pfe_totalScore}"></td>
+							<td th:text="${performanceInfo.pfe_tmScore}"></td>
+							<td th:text="${performanceInfo.pfe_tlScore}"></td>
+
+							<td th:text="${performanceInfo.pfe_fullAtt}"></td>
+							<td th:text="${performanceInfo.pfe_lecturer}"></td>
+							<td th:text="${performanceInfo.pfe_noLeakage}"></td>
+							<td th:text="${performanceInfo.pfe_overValidBug}"></td>
+							<td th:text="${performanceInfo.pfe_bugRanking}"></td>
+							<td th:text="${performanceInfo.pfe_contribution}"></td>
+							<td th:text="${performanceInfo.pfe_praise}"></td>
+
+							<td th:text="${performanceInfo.pfe_tardiness}"></td>
+							<td th:text="${performanceInfo.pfe_lessValidBug}"></td>
+							<td th:text="${performanceInfo.pfe_leakage}"></td>
+							<td th:text="${performanceInfo.pfe_complaint}"></td>
+							<td th:text="${performanceInfo.pfe_InfoSafety}"></td>
+
+							<td th:text="${performanceInfo.pfe_bugRankingNum}"></td>
+							<td th:text="${performanceInfo.pfe_workingDay}"></td>
+							<td th:text="${performanceInfo.pfe_bugPerDay}"></td>
+							<td th:text="${performanceInfo.pfe_LatenessNum}"></td>
+							<td th:text="${performanceInfo.pfe_missing}"></td>
+
+
+							<td th:text="${performanceInfo.pfe_tmComment}"></td>
+
 						</tr>
 
 					</table>

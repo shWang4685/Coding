@@ -21,7 +21,8 @@ public class LoginDemoController {
     //@CrossOrigin(origins ="http://localhost:8888")
     public Msg checkLogin(@RequestBody String parms, HttpServletRequest request, HttpServletResponse response){
         //判断是否有该用户名称
-        System.out.println("进来了");
+        System.out.println("进来了:"+parms);
+
         CompanyUser user = companyUserService.checkLogin(parms);
         System.out.println("第一个user:"+user);
         if(user!=null){

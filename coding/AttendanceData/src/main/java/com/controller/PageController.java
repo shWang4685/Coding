@@ -1,9 +1,11 @@
 package com.controller;
 
 import com.entity.CompanyUser;
+import com.entity.Performance;
 import com.entity.User;
-import org.apache.catalina.Context;
-import org.apache.catalina.Session;
+import com.pojo.PerformanceInfo;
+import com.service.PerformanceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,8 @@ import java.util.List;
 @Controller
 public class PageController {
 
+    @Autowired
+    private PerformanceService performanceService;
     /**
      * restful风格实现页面跳转
      */
@@ -66,11 +70,35 @@ public class PageController {
         return "emplist";
     }
 
+    /**
+     * 跳转到员工绩效页面。并且将数据传输过去
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getAllEmp",method = RequestMethod.POST)
-    public String  getAllEmp(HttpServletRequest request, HttpServletResponse response){
+    public String  getAllEmp(HttpServletRequest request, HttpServletResponse response,Model model){
         CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
         System.out.println("s--------l:"+user.toString());
+        List<Performance> performances=null;
+        //如果权限等级为1那么存储所有的员工绩效
+        //如果权限等级为2那么存储TM为xx的员工绩效
+        //如果权限等级为3那么存储ID为xx的员工绩效
+        if(user.getUser_permission()==1){
+            performances=performanceService.getAllPerformanceInf();
+            System.out.println("size:"+performances.size());
+        }else if (user.getUser_permission()==2){
+            performances=performanceService.getPerformanceByTMName(user);
+            System.out.println("size:"+performances.size());
 
+        }else if (user.getUser_permission()==3){
+            performances=performanceService.getPerformanceByByUserId(user);
+        }
+        List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
+        System.out.println(performanceInfos.toString());
+        model.addAttribute("performanceInfos",performanceInfos);
+
+        //System.out.println(performances.toString());
         return "emplist";
     }
 }

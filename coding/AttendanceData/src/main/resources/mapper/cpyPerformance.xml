@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.PerformanceDao">
+    <resultMap id="BaseResultMap" type="com.entity.Performance">
+        <id column="pfe_id" jdbcType="INTEGER" property="pfe_id" />
+        <id column="pfe_user_id" jdbcType="INTEGER" property="pfe_user_id" />
+        <id column="pfe_rating" jdbcType="VARCHAR" property="pfe_rating" />
+        <id column="pfe_totalScore" jdbcType="VARCHAR" property="pfe_totalScore" />
+        <id column="pfe_tmScore" jdbcType="VARCHAR" property="pfe_tmScore" />
+        <id column="pfe_tlScore" jdbcType="VARCHAR" property="pfe_tlScore" />
+        <id column="pfe_addPoint" jdbcType="VARCHAR" property="pfe_addPoint" />
+        <id column="pfe_minusPoint" jdbcType="VARCHAR" property="pfe_minusPoint" />
+        <id column="pfe_originalData" jdbcType="VARCHAR" property="pfe_originalData" />
+        <id column="pfe_tmComment" jdbcType="VARCHAR" property="pfe_tmComment" />
+        <id column="pfe_tlComment" jdbcType="VARCHAR" property="pfe_tlComment" />
+    </resultMap>
+    <sql id="Base_Column_List">pfe_id,pfe_user_id,pfe_rating,pfe_totalScore,pfe_tmScore,pfe_tlScore,pfe_addPoint,pfe_minusPoint,pfe_originalData,pfe_tmComment,pfe_tlComment
+    </sql>
+    <!--  查询所有-->
+    <select id="getAllPerformanceInf"  resultMap="BaseResultMap">
+        select
+        *
+        from  cpy_performance;
+    </select>
+    <!--  查询TM是user_TM 的绩效-->
+    <select id="getPerformanceByTMName"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_performance
+        where pfe_user_id in (select user_id from cpy_user where user_TM=#{user_TM});
+    </select>
+
+    <!--  查询TM是user_TM 的绩效-->
+    <select id="getPerformanceByByUserId"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_performance
+        where pfe_user_id =#{user_id};
+    </select>
+
+
+</mapper>
