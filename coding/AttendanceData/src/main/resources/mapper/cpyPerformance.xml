@@ -33,7 +33,7 @@
         where pfe_user_id in (select user_id from cpy_user where user_TM=#{user_TM});
     </select>
 
-    <!--  查询TM是user_TM 的绩效-->
+    <!--  通过员工id查询-->
     <select id="getPerformanceByByUserId"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
         *
