@@ -94,7 +94,15 @@
 	#navigation ul li a:hover {
 		background: #5494F3;
 	}
-	
+	#ctlBtn {
+
+		margin-left: 1600px;
+		margin-top: -10px;
+		width: 140px;
+		height: 45px;
+		background: #74A8F5;
+	}
+
 	#content {
 		padding: 0 15px;
 		margin: 0 auto 0 auto;
@@ -446,4 +454,30 @@
 	code {
 		font-size: 1.2em;
 		color: #73A822;
+	}
+
+	#picker div.webuploader-pick{
+		height: 30px;
+		padding: 6px 15px;
+		margin-top: 3px;
+		height: 30px!important;
+	}
+	#picker {
+		height: 10px;
+		float: left;
+		margin-left: 1500px;
+		margin-top: 20px;
+
+	}
+	#thelist{
+		float: left;
+		margin-left: 1500px;
+		margin-top: 20px;
+	}
+	#tmDataBtn {
+		margin-left: 1600px;
+		margin-top: -0px;
+		width: 140px;
+		height: 45px;
+		background: #74A8F5;
 	}

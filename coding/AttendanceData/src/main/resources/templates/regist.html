@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>regist</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<link rel="stylesheet" th:href="@{css/style.css}"/>
+		<script type="text/javascript" th:src="@{js/jquery-1.11.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{js/regist.js}"></script>
+		<script type="text/javascript" th:src="@{js/data.js}"></script>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="top_content">
+					<div id="header">
+						<div id="rightheader">
+
+						</div>
+						<div id="topheader">
+							<h1 id="title">
+								<a href="#">文思海辉</a>
+							</h1>
+						</div>
+						<div id="navigation">
+						</div>
+					</div>
+				<div id="content">
+					<p id="whereami">
+					</p>
+					<h1 style="margin-left: 315px;">
+						注册
+					</h1>
+
+						<table cellpadding="0" cellspacing="0" border="0"
+							class="form_table" style="margin-left: 180px;">
+							<tr>
+								<td valign="middle" align="right" >
+									用户名:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri"  id="username"  onblur="userName_onblur()" maxlength="12"/>
+								</td>
+								<td ><p id="username_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									真实姓名:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" name="name" id="realName" onblur="realName_onblur();" maxlength="5"/>
+								</td>
+								<td ><p id="name_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									工牌号:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" placeholder="工号以P开头的字母" class="inputgri" name="name" id="jobNum" onblur="jobNum_onblur();" maxlength="10"/>
+								</td>
+								<td ><p id="jobNum_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									密码:
+								</td>
+								<td valign="middle" align="left">
+									<input type="password" class="inputgri" name="pwd" id="pwd" onblur="pwd_onblur();" maxlength="15"/>
+								</td>
+								<td ><p id="pwd_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+							<tr>
+								<td valign="middle" align="right">
+									确认密码:
+								</td>
+								<td valign="middle" align="left">
+									<input type="password" class="inputgri" name="pwd" id="confirmPwd" onblur="confirmPwd_onblur();" maxlength="15"/>
+								</td>
+								<td ><p id="confirmPwd_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+							
+							<tr>
+								<td valign="middle" align="right">
+									邮箱账号:
+								</td>
+								<td valign="middle" align="left">
+									<input type="text" class="inputgri" id="email_id" placeholder="请使用公司邮箱"   onblur="emailCheck();" />
+								</td>
+								<td ><p id="email_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+							<tr >
+								<td valign="middle"  align="right">
+									TM姓名:
+								</td>
+								<td valign="middle" align="left">
+									<select style="width: 180px;" id="TMSelect" onfocus="selectTM();" onblur="onblur_TMselect();">	
+										<option value ="no" ></option>
+										  <!--<option value ="volvo">Volvo</option>
+										  <option value ="saab">Saab</option>
+										  <option value="opel">Opel</option>
+										  <option value="audi">Audi</option>			  -->
+									</select>
+								</td>
+								<td ><p id="TMSelect_tips" style="margin-top: 10px;"></p></td>
+								
+							</tr>
+								<tr>
+								<td valign="middle" align="right">
+									TL姓名:
+								</td>
+								<td valign="middle" align="left" >
+									
+									<select style="width: 180px;" id="TLSelect" onblur="onblur_TLselect();">								
+										  <option value ="no" ></option>
+									</select>
+								</td>
+								<td ><p id="TLSelect_tips" style="margin-top: 10px;"></p></td>
+							</tr>
+						</table>
+						<p>
+							<input type="button" onclick="actionRegitst();" class="button" value="Submit &raquo;" style="margin-left: 320px;"/>
+						</p>
+
+				</div>
+			</div>
+			<div id="footer">
+				<div id="footer_bg">
+					联系管理员（企业微信）：t_wshwang_ex(王仕衡)
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

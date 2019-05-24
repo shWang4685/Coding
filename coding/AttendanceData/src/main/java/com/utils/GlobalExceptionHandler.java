@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 找不到页面的时候
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
     /**

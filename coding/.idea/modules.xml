@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/Chapter2/Chapter2.iml" filepath="$PROJECT_DIR$/Chapter2/Chapter2.iml" />
       <module fileurl="file://$PROJECT_DIR$/httpClient/HttpClient.iml" filepath="$PROJECT_DIR$/httpClient/HttpClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/NewMyBatis/NewMyBatis.iml" filepath="$PROJECT_DIR$/NewMyBatis/NewMyBatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emailValidate/RegisterDemo.iml" filepath="$PROJECT_DIR$/emailValidate/RegisterDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringBootDemo/SpringBootDemo.iml" filepath="$PROJECT_DIR$/SpringBootDemo/SpringBootDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestDemo/TestDemo.iml" filepath="$PROJECT_DIR$/TestDemo/TestDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserManager/UserManager.iml" filepath="$PROJECT_DIR$/UserManager/UserManager.iml" />

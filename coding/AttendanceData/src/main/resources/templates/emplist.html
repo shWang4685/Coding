@@ -1,7 +1,5 @@
-<!DOCTYPE html >
-
+<!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
-
 	<head>
 		<title>emplist</title>
 		<link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}"/>
@@ -17,7 +15,7 @@
 					</div>
 					<div id="topheader">
 						<h1 id="title">
-							<a href="#">文思海辉-优化一组</a>
+							<a href="#">文思海辉-员工绩效</a>
 						</h1>
 					</div>
 					<div id="navigation">
@@ -106,6 +104,7 @@
 							</td>
 
 						</tr>
+						
 						<tr class="row1" th:each="performanceInfo:${performanceInfos}">
 							<td th:text="${performanceInfo.pfe_user_name}"></td>
 							<td th:text="${performanceInfo.pfe_rating}"></td>
@@ -133,18 +132,15 @@
 							<td th:text="${performanceInfo.pfe_LatenessNum}"></td>
 							<td th:text="${performanceInfo.pfe_missing}"></td>
 
-
 							<td th:text="${performanceInfo.pfe_tmComment}"></td>
-
 						</tr>
-
 					</table>
 
 				</div>
 			</div>
 			<div id="footer">
 				<div id="footer_bg">
-				ABC@126.com
+					联系管理员（企业微信）：t_wshwang_ex(王仕衡)
 				</div>
 			</div>
 		</div>

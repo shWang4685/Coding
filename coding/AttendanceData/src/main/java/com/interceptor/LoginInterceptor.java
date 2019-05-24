@@ -51,6 +51,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//如果登录了，会把用户信息存进session
 		HttpSession session = request.getSession();
 		CompanyUser users =  (CompanyUser) session.getAttribute("CompanyUser");
+
 		/*User userInfo = new User();
 		userInfo.setId(users.get(0).getId());
 		userInfo.setName(users.get(0).getName());
@@ -94,7 +95,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//notLoginPaths.add("/");
 		notLoginPaths.add("/login");
 		notLoginPaths.add("/logindemo");
-		
+		notLoginPaths.add("/regist");
+		notLoginPaths.add("/registAction");
+		notLoginPaths.add("/registActivation");
+		notLoginPaths.add("/registSucess");
+		notLoginPaths.add("/registFail");
+		notLoginPaths.add("/uploadfile");
+		notLoginPaths.add("/upload");
+		//notLoginPaths.add("/insertUserByExcel");
+
+
+		//notLoginPaths.add("/tmpage");
+	//	notLoginPaths.add("/allTMInfoPage");
 		if(notLoginPaths.contains(path)) return false;
 		return true;
 	}

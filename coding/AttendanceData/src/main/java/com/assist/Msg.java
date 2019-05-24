@@ -13,7 +13,7 @@ public class Msg {
 	private int code;
 	private String msg;
 	private Map<String, Object> map = new HashMap<String, Object>();
-	
+	private Map<String, String> mapStr = new HashMap<String, String>();
 	/**
 	 * @Title: success() 
 	 * @Description: code为100则msg成功
@@ -26,6 +26,13 @@ public class Msg {
 		Msg msg = new Msg();
 		msg.setCode(100);
 		msg.setMsg("成功");
+		return msg;
+	}
+
+	public static Msg registSucess(){
+		Msg msg = new Msg();
+		msg.setCode(101);
+		msg.setMsg("注册成功");
 		return msg;
 	}
 	
@@ -65,5 +72,13 @@ public class Msg {
 	}
 	public void setMap(Map<String, Object> map) {
 		this.map = map;
+	}
+
+	public Map<String, String> getMapStr() {
+		return mapStr;
+	}
+
+	public void setMapStr(Map<String, String> mapStr) {
+		this.mapStr = mapStr;
 	}
 }

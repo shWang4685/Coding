@@ -13,6 +13,7 @@
         <module name="demoThree" />
         <module name="HttpClient" />
         <module name="NewMyBatis" />
+        <module name="RegisterDemo" />
         <module name="spring13" />
         <module name="springboot-mybatis-demo" />
         <module name="springboot2-mybatis-demo" />
@@ -31,6 +32,7 @@
       <module name="HttpClient" target="1.6" />
       <module name="MyBatis" target="1.8" />
       <module name="NewMyBatis" target="1.6" />
+      <module name="RegisterDemo" target="1.8" />
       <module name="School" target="1.8" />
       <module name="spring13" target="1.8" />
       <module name="springboot-mybatis-demo" target="1.8" />

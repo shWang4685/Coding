@@ -14,6 +14,7 @@ public class Performance {
     private String pfe_originalData;// '原始数据(有效bug总数,工作日,日均有效bug数,个人迟到次数,是否漏测)',
     private String pfe_tmComment ;// 'TM评语',
     private String pfe_tlComment ;// 'TL评语'
+    private int pfe_quarter;//'季度',
 
     public int getPfe_id() {
         return pfe_id;
@@ -103,28 +104,12 @@ public class Performance {
         this.pfe_tlComment = pfe_tlComment;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Performance that = (Performance) o;
-        return pfe_id == that.pfe_id &&
-                pfe_user_id == that.pfe_user_id &&
-                Objects.equals(pfe_rating, that.pfe_rating) &&
-                Objects.equals(pfe_totalScore, that.pfe_totalScore) &&
-                Objects.equals(pfe_tmScore, that.pfe_tmScore) &&
-                Objects.equals(pfe_tlScore, that.pfe_tlScore) &&
-                Objects.equals(pfe_addPoint, that.pfe_addPoint) &&
-                Objects.equals(pfe_minusPoint, that.pfe_minusPoint) &&
-                Objects.equals(pfe_originalData, that.pfe_originalData) &&
-                Objects.equals(pfe_tmComment, that.pfe_tmComment) &&
-                Objects.equals(pfe_tlComment, that.pfe_tlComment);
+    public int getPfe_quarter() {
+        return pfe_quarter;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(pfe_id, pfe_user_id, pfe_rating, pfe_totalScore, pfe_tmScore, pfe_tlScore, pfe_addPoint, pfe_minusPoint, pfe_originalData, pfe_tmComment, pfe_tlComment);
+    public void setPfe_quarter(int pfe_quarter) {
+        this.pfe_quarter = pfe_quarter;
     }
 
     @Override
@@ -141,6 +126,32 @@ public class Performance {
                 ", pfe_originalData='" + pfe_originalData + '\'' +
                 ", pfe_tmComment='" + pfe_tmComment + '\'' +
                 ", pfe_tlComment='" + pfe_tlComment + '\'' +
+                ", pfe_quarter=" + pfe_quarter +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Performance that = (Performance) o;
+        return pfe_id == that.pfe_id &&
+                pfe_user_id == that.pfe_user_id &&
+                pfe_quarter == that.pfe_quarter &&
+                Objects.equals(pfe_rating, that.pfe_rating) &&
+                Objects.equals(pfe_totalScore, that.pfe_totalScore) &&
+                Objects.equals(pfe_tmScore, that.pfe_tmScore) &&
+                Objects.equals(pfe_tlScore, that.pfe_tlScore) &&
+                Objects.equals(pfe_addPoint, that.pfe_addPoint) &&
+                Objects.equals(pfe_minusPoint, that.pfe_minusPoint) &&
+                Objects.equals(pfe_originalData, that.pfe_originalData) &&
+                Objects.equals(pfe_tmComment, that.pfe_tmComment) &&
+                Objects.equals(pfe_tlComment, that.pfe_tlComment);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(pfe_id, pfe_user_id, pfe_rating, pfe_totalScore, pfe_tmScore, pfe_tlScore, pfe_addPoint, pfe_minusPoint, pfe_originalData, pfe_tmComment, pfe_tlComment, pfe_quarter);
     }
 }

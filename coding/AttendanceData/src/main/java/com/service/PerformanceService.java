@@ -10,7 +10,8 @@ import java.util.List;
 public interface PerformanceService {
     List<Performance> getAllPerformanceInf();
     List<Performance> getPerformanceByTMName(CompanyUser user);
+    List<Performance> getPerformanceByTLName(CompanyUser user);
     List<Performance> getPerformanceByByUserId(CompanyUser user);
-
     List<PerformanceInfo> changePerformance(List<Performance> performances);
+    boolean addPerformance(Performance performance);
 }

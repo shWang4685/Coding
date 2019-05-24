@@ -16,8 +16,10 @@
         <id column="pfe_originalData" jdbcType="VARCHAR" property="pfe_originalData" />
         <id column="pfe_tmComment" jdbcType="VARCHAR" property="pfe_tmComment" />
         <id column="pfe_tlComment" jdbcType="VARCHAR" property="pfe_tlComment" />
+        <id column="pfe_quarter" jdbcType="INTEGER" property="pfe_quarter" />
+
     </resultMap>
-    <sql id="Base_Column_List">pfe_id,pfe_user_id,pfe_rating,pfe_totalScore,pfe_tmScore,pfe_tlScore,pfe_addPoint,pfe_minusPoint,pfe_originalData,pfe_tmComment,pfe_tlComment
+    <sql id="Base_Column_List">pfe_id,pfe_user_id,pfe_rating,pfe_totalScore,pfe_tmScore,pfe_tlScore,pfe_addPoint,pfe_minusPoint,pfe_originalData,pfe_tmComment,pfe_tlComment,pfe_quarter
     </sql>
     <!--  查询所有-->
     <select id="getAllPerformanceInf"  resultMap="BaseResultMap">
@@ -32,6 +34,13 @@
         from  cpy_performance
         where pfe_user_id in (select user_id from cpy_user where user_TM=#{user_TM});
     </select>
+    <!--  查询TM是user_TL 的绩效-->
+    <select id="getPerformanceByTLName"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_performance
+        where pfe_user_id in (select user_id from cpy_user where user_TL=#{user_TL});
+    </select>
 
     <!--  通过员工id查询-->
     <select id="getPerformanceByByUserId"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
@@ -40,6 +49,78 @@
         from  cpy_performance
         where pfe_user_id =#{user_id};
     </select>
-
+    <insert id="insertPerformance" useGeneratedKeys="true" keyProperty="pfe_id" parameterType="com.entity.Performance">
+      INSERT INTO cpy_performance
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pfe_user_id != null">
+                pfe_user_id,
+            </if>
+            <if test="pfe_rating != null">
+                pfe_rating,
+            </if>
+            <if test="pfe_totalScore != null">
+                pfe_totalScore,
+            </if>
+            <if test="pfe_tmScore != null">
+                pfe_tmScore,
+            </if>
+            <if test="pfe_tlScore != null">
+                pfe_tlScore,
+            </if>
+            <if test="pfe_addPoint != null">
+                pfe_addPoint,
+            </if>
+            <if test="pfe_minusPoint != null">
+                pfe_minusPoint,
+            </if>
+            <if test="pfe_originalData != null">
+                pfe_originalData,
+            </if>
+            <if test="pfe_tmComment != null">
+                pfe_tmComment,
+            </if>
+            <if test="pfe_tlComment != null">
+                pfe_tlComment,
+            </if>
+            <if test="pfe_quarter != null">
+                pfe_quarter,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pfe_user_id != null">
+                #{pfe_user_id,jdbcType=INTEGER},
+            </if>
+            <if test="pfe_rating != null">
+                #{pfe_rating,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_totalScore != null">
+                #{pfe_totalScore,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_tmScore != null">
+                #{pfe_tmScore,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_tlScore != null">
+                #{pfe_tlScore,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_addPoint != null">
+                #{pfe_addPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_minusPoint != null">
+                #{pfe_minusPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_originalData != null">
+                #{pfe_originalData,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_tmComment != null">
+                #{pfe_tmComment,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_tlComment != null">
+                #{pfe_tlComment,jdbcType=VARCHAR},
+            </if>
+            <if test="pfe_quarter != null">
+                #{pfe_quarter,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 
 </mapper>

@@ -12,7 +12,7 @@ public enum ErrEnum {
 	/**
      * 登录密码错误
      */
-	PASSWORD_LOGIN_ERROR("passwordLoginErr","密码错误，错误次数+1，达到三次2分钟内不能登录！"),
+	PASSWORD_LOGIN_ERROR("passwordLoginErr","密码错误/账号未激活，错误次数+1，达到三次2分钟内不能登录！"),
 	
 	/**
      * 登录密码错误达到3次错误

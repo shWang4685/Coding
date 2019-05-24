@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.TMPerformanceDao">
+    <resultMap id="BaseResultMap" type="com.entity.TMPerformance">
+        <id column="tmpfe_id" jdbcType="INTEGER" property="tmpfe_id"/>
+        <id column="tmpfe_user_id" jdbcType="INTEGER" property="tmpfe_user_id"/>
+        <id column="tmpfe_rating" jdbcType="VARCHAR" property="tmpfe_rating"/>
+        <id column="tmpfe_totalScore" jdbcType="VARCHAR" property="tmpfe_totalScore"/>
+        <id column="tmpfe_ctoScore" jdbcType="VARCHAR" property="tmpfe_ctoScore"/>
+        <id column="tmpfe_tlScore" jdbcType="VARCHAR" property="tmpfe_tlScore"/>
+        <id column="tmpfe_addPoint" jdbcType="VARCHAR" property="tmpfe_addPoint"/>
+        <id column="tmpfe_minusPoint" jdbcType="VARCHAR" property="tmpfe_minusPoint"/>
+
+        <id column="tmpfe_latenessNum" jdbcType="VARCHAR" property="tmpfe_latenessNum"/>
+        <id column="tmpfe_leakage" jdbcType="VARCHAR" property="tmpfe_leakage"/>
+        <id column="tmpfe_originalData" jdbcType="VARCHAR" property="tmpfe_originalData"/>
+
+        <id column="tmpfe_ctoComment" jdbcType="VARCHAR" property="tmpfe_ctoComment"/>
+        <id column="tmpfe_tlComment" jdbcType="VARCHAR" property="tmpfe_tlComment"/>
+        <id column="tmpfe_quarter" jdbcType="INTEGER" property="tmpfe_quarter"/>
+
+
+    </resultMap>
+
+    <!--  查询所有-->
+    <select id="getAllTMPerformance"  resultMap="BaseResultMap">
+        select
+        *
+        from  cpy_tm_performance;
+    </select>
+    <!--  查询TM是user_TM 的绩效-->
+    <select id="getTMPerformanceByTMName"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_tm_performance
+        where tmpfe_user_id in (select user_id from cpy_user where user_TM=#{user_TM});
+    </select>
+    <!--  查询TM是user_TL 的绩效-->
+    <select id="getTMPerformanceByTLName"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_tm_performance
+        where tmpfe_user_id in (select user_id from cpy_user where user_TL=#{user_TL});
+    </select>
+
+    <!--  通过员工id查询-->
+    <select id="getTMPerformanceByByUserId"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
+        select
+        *
+        from  cpy_tm_performance
+        where tmpfe_user_id =#{user_id};
+    </select>
+    <insert id="insertTMPerformance" useGeneratedKeys="true" keyProperty="tmpfe_id" parameterType="com.entity.TMPerformance">
+      INSERT INTO cpy_tm_performance
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="tmpfe_user_id != null">
+                tmpfe_user_id,
+            </if>
+            <if test="tmpfe_rating != null">
+                tmpfe_rating,
+            </if>
+            <if test="tmpfe_totalScore != null">
+                tmpfe_totalScore,
+            </if>
+            <if test="tmpfe_ctoScore != null">
+                tmpfe_ctoScore,
+            </if>
+            <if test="tmpfe_tlScore != null">
+                tmpfe_tlScore,
+            </if>
+            <if test="tmpfe_addPoint != null">
+                tmpfe_addPoint,
+            </if>
+            <if test="tmpfe_minusPoint != null">
+                tmpfe_minusPoint,
+            </if>
+            <if test="tmpfe_latenessNum != null">
+                tmpfe_latenessNum,
+            </if>
+            <if test="tmpfe_leakage != null">
+                tmpfe_leakage,
+            </if>
+            <if test="tmpfe_originalData != null">
+                tmpfe_originalData,
+            </if>
+            <if test="tmpfe_ctoComment != null">
+                tmpfe_ctoComment,
+            </if>
+            <if test="tmpfe_tlComment != null">
+                tmpfe_tlComment,
+            </if>
+            <if test="tmpfe_quarter != null">
+                tmpfe_quarter,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="tmpfe_user_id != null">
+                #{tmpfe_user_id,jdbcType=INTEGER},
+            </if>
+            <if test="tmpfe_rating != null">
+                #{tmpfe_rating,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_totalScore != null">
+                #{tmpfe_totalScore,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_ctoScore != null">
+                #{tmpfe_ctoScore,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_tlScore != null">
+                #{tmpfe_tlScore,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_addPoint != null">
+                #{tmpfe_addPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_minusPoint != null">
+                #{tmpfe_minusPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_latenessNum != null">
+                #{tmpfe_latenessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_leakage != null">
+                #{tmpfe_leakage,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_originalData != null">
+                #{tmpfe_originalData,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_ctoComment != null">
+                #{tmpfe_ctoComment,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_tlComment != null">
+                #{tmpfe_tlComment,jdbcType=VARCHAR},
+            </if>
+            <if test="tmpfe_quarter != null">
+                #{tmpfe_quarter,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

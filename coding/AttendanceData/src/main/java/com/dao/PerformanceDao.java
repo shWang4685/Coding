@@ -19,11 +19,14 @@ public interface PerformanceDao {
      * @return
      */
     List<Performance> getPerformanceByTMName(CompanyUser user);
-
+    List<Performance> getPerformanceByTLName(CompanyUser user) ;
     /**
      * 获得员工ID为user_id 的员工绩效
      * @param user
      * @return
      */
     List<Performance> getPerformanceByByUserId(CompanyUser user);
+
+    int insertPerformance(Performance performance);
+
 }

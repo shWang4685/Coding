@@ -12,8 +12,11 @@
         <id column="user_TM" jdbcType="VARCHAR" property="user_TM" />
         <id column="user_TL" jdbcType="VARCHAR" property="user_TL" />
         <id column="user_permission" jdbcType="INTEGER" property="user_permission" />
+        <id column="user_email" jdbcType="VARCHAR" property="user_email" />
+        <id column="user_state" jdbcType="INTEGER" property="user_state" />
+        <id column="user_code" jdbcType="VARCHAR" property="user_code" />
     </resultMap>
-    <sql id="Base_Column_List">user_id,user_account,user_password,user_name,user_TM,user_TL,user_permission
+    <sql id="Base_Column_List">user_id,user_account,user_password,user_name,user_TM,user_TL,user_permission,user_email,user_state,user_code
     </sql>
     <!--  查询是否有用户名为x-->
     <select id="checkUser"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
@@ -25,13 +28,95 @@
     <select id="checkLogin"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
         *
-        from  cpy_user where user_account=#{user_account} and user_password=#{user_password};
+        from  cpy_user where user_account=#{user_account} and user_password=#{user_password} and user_state=1;
     </select>
-    <!--  查询是否有用户名和秘密正确性-->
+    <!-- 通过用户id查询用户信息 -->
     <select id="selectCompanyUserByUserId"  resultMap="BaseResultMap" parameterType="Integer">
         select
         *
         from  cpy_user where user_id=#{user_id}
     </select>
+    <select id="selectCompanyUserByEmail" resultMap="BaseResultMap" parameterType="String">
+         select
+        *
+        from  cpy_user where user_email=#{user_email}
+    </select>
+    <!-- 通过用户登录账号查询用户信息 -->
+    <select id="selectCompanyUserByUserAccount"  resultMap="BaseResultMap" parameterType="String">
+        select
+        *
+        from  cpy_user where user_account=#{user_account}
+    </select>
 
+    <update id="updataCompanyUserStateByCode" parameterType="String">
+        update cpy_user set user_state=1 where user_code=#{user_code}
+    </update>
+
+    <insert id="insertCompanyUser" parameterType="com.entity.CompanyUser">
+        INSERT INTO cpy_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="user_id != null">
+                user_id,
+            </if>
+            <if test="user_account != null">
+                user_account,
+            </if>
+            <if test="user_password != null">
+                user_password,
+            </if>
+            <if test="user_name != null">
+                user_name,
+            </if>
+            <if test="user_TM != null">
+                user_TM,
+            </if>
+            <if test="user_TL != null">
+                user_TL,
+            </if>
+            <if test="user_permission != null">
+                user_permission,
+            </if>
+            <if test="user_email != null">
+                user_email,
+            </if>
+            <if test="user_state != null">
+                user_state,
+            </if>
+            <if test="user_code != null">
+                user_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="user_id != null">
+                #{user_id,jdbcType=INTEGER},
+            </if>
+            <if test="user_account != null">
+                #{user_account,jdbcType=VARCHAR},
+            </if>
+            <if test="user_password != null">
+                #{user_password,jdbcType=VARCHAR},
+            </if>
+            <if test="user_name != null">
+                #{user_name,jdbcType=VARCHAR},
+            </if>
+            <if test="user_TM != null">
+                #{user_TM,jdbcType=VARCHAR},
+            </if>
+            <if test="user_TL != null">
+                #{user_TL,jdbcType=VARCHAR},
+            </if>
+            <if test="user_permission != null">
+                #{user_permission,jdbcType=INTEGER},
+            </if>
+            <if test="user_email != null">
+                #{user_email,jdbcType=VARCHAR},
+            </if>
+            <if test="user_state != null">
+                #{user_state,jdbcType=INTEGER},
+            </if>
+            <if test="user_code != null">
+                #{user_code,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>
