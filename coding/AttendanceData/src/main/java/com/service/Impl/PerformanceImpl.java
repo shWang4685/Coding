@@ -4,12 +4,14 @@ import com.dao.CompanyUserDao;
 import com.dao.PerformanceDao;
 import com.entity.CompanyUser;
 import com.entity.Performance;
+import com.pojo.PagePerformance;
 import com.pojo.PerformanceInfo;
 import com.service.PerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 @Service
 public class PerformanceImpl implements PerformanceService {
@@ -56,6 +58,15 @@ public class PerformanceImpl implements PerformanceService {
         return performanceDao.getPerformanceByByUserId(user);
     }
 
+    @Override
+    public List<Performance> getPerformanceByLikeName(String  likeName,String likeTMName,String likeTLName) {
+        HashMap<String,String> hashMap=new HashMap<String,String>();
+        hashMap.put("likeName",likeName);
+        hashMap.put("likeTMName",likeTMName);
+        hashMap.put("likeTLName",likeTLName);
+        return performanceDao.selectLikeByName(hashMap) ;
+    }
+
     /**
      * 将数据库中的绩效数据项对象转换成20条字段的实体
      * @param performances
@@ -72,6 +83,7 @@ public class PerformanceImpl implements PerformanceService {
                 continue;
             }
             performanceInfo.setPfe_user_name(companyUserDao.selectCompanyUserByUserId(pf.getPfe_user_id()).getUser_name());
+            performanceInfo.setPfe_tm_name(companyUserDao.selectCompanyUserByUserId(pf.getPfe_user_id()).getUser_TM());
             performanceInfo.setPfe_rating(pf.getPfe_rating());
             performanceInfo.setPfe_totalScore(pf.getPfe_totalScore());
             performanceInfo.setPfe_tmScore(pf.getPfe_tmScore());
@@ -148,6 +160,47 @@ public class PerformanceImpl implements PerformanceService {
             bool=false;
         }
         return bool;
+    }
+
+    /**
+     * 判断是否已经有该员工在当前季度的数据
+     * @return
+     */
+    @Override
+    public boolean checkPerformanceIsExist(Performance performance) {
+        List<Performance> temp=performanceDao.selectPerByIdAndQuarter(performance);
+        if(temp.size()>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 删除id为pfe_user_id/季度为：pfe_quarter的绩效数据，这里主要用在上传数据替换
+     * @return
+     */
+    @Override
+    public boolean deletePerfomanceIsExist(Performance performance) {
+        int temp=performanceDao.deletePerByIdAndQuarter(performance);
+        if(temp>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Performance> selectPerformanceByPage( PagePerformance pagePerformance) {
+        HashMap<String,Integer> hashMap=new HashMap<String,Integer>();
+
+        System.out.println("offset:"+pagePerformance.getPageIndex());
+        System.out.println("limit:"+pagePerformance.getPageCount());
+
+        //开始值：页码+(页码-1)*limit
+        hashMap.put("offset",1+((pagePerformance.getPageIndex()-1)*pagePerformance.getPageCount()));
+        hashMap.put("limit",pagePerformance.getPageCount());
+        return performanceDao.selectByPage(hashMap);
     }
 
 

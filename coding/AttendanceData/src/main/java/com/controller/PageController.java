@@ -5,6 +5,8 @@ import com.entity.Performance;
 import com.entity.TMPerformance;
 import com.entity.User;
 import com.google.common.io.Files;
+import com.pojo.Fruit;
+import com.pojo.PagePerformance;
 import com.pojo.PerformanceInfo;
 import com.pojo.TMPerformanceInfo;
 import com.service.CompanyUserService;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class PageController {
     @RequestMapping("/{page}")
     public String showInfo(@PathVariable String page){
         String goPage=null;
-        String[] pageList={"emplist","login","regist","registSucess","registFail","uploadfile","indexUp","tmpage","allTMInfoPage"};
+        String[] pageList={"emplist","login","regist","registSucess","registFail","uploadfile","indexUp","tmpage","allTMInfoPage","Thyleaf"};
         for(String str:pageList){
             if(page.equals(str.toString().trim())){
                 goPage=page;
@@ -102,6 +105,7 @@ public class PageController {
      */
     @RequestMapping(value = "/getAllEmp",method = RequestMethod.POST)
     public String  getAllEmp(HttpServletRequest request, HttpServletResponse response,Model model){
+        PagePerformance pagePerformance=new PagePerformance();
         CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
         List<Performance> performances=null;
         //如果权限等级为0那么存储所有的员工绩效
@@ -109,25 +113,50 @@ public class PageController {
         //如果权限等级为2那么存储TM为xx的员工绩效
         //如果权限等级为3那么存储ID为xx的员工绩效
         if(user.getUser_permission()==0){
+            //获得权限为0的账号显示信息
             performances=performanceService.getAllPerformanceInf();
             List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
             model.addAttribute("performanceInfos",performanceInfos);
+            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+" 条数据";
+            model.addAttribute("performanceSize",performanceInfoSize);
+            DecimalFormat df=new DecimalFormat("0.00");
+            int pageCount=performanceInfos.size()/ pagePerformance.getPageCount();
+            System.out.println(performanceInfos.size()/ pagePerformance.getPageCount());
+            //61组数据，分7页而不是分6页
+            if(performanceInfos.size()% pagePerformance.getPageCount()!=0){
+                model.addAttribute("pageCount",pageCount+1);
+            }else {
+                model.addAttribute("pageCount",pageCount);
+            }
             return "adminpage";
         }else if(user.getUser_permission()==1){
             performances=performanceService.getPerformanceByTLName(user);
             List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
             model.addAttribute("performanceInfos",performanceInfos);
+            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+" 条数据";
+            model.addAttribute("performanceSize",performanceInfoSize);
+            int pageCount=performanceInfos.size()/ pagePerformance.getPageCount();
+            if(performanceInfos.size()% pagePerformance.getPageCount()!=0){
+                model.addAttribute("pageCount",pageCount+1);
+            }else {
+                model.addAttribute("pageCount",pageCount);
+            }
             return "adminpage";
         }else if (user.getUser_permission()==2){
             //查看到自己的数据信息
             List<TMPerformance> tmPerformances=tmPerformanceService.getTMPerformanceByByUserId(user);
             List<TMPerformanceInfo> tmPerformanceInfos=tmPerformanceService.changeTMPerformance(tmPerformances);
             model.addAttribute("tmPerformanceInfos",tmPerformanceInfos);
+            String tmPerformanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+tmPerformanceInfos.size()+" 条数据";
+            model.addAttribute("tmPerformanceSize",tmPerformanceInfoSize);
+
             return "tmpage";
         }else if (user.getUser_permission()==3){
             performances=performanceService.getPerformanceByByUserId(user);
             List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
             model.addAttribute("performanceInfos",performanceInfos);
+            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+" 条数据";
+            model.addAttribute("performanceSize",performanceInfoSize);
             return "emplist";
         }else {
             model.addAttribute("performanceInfos",null);
@@ -153,11 +182,15 @@ public class PageController {
             performances=performanceService.getAllPerformanceInf();
             List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
             model.addAttribute("performanceInfos",performanceInfos);
+            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+" 条数据";
+            model.addAttribute("performanceSize",performanceInfoSize);
             return "adminpage";
         }else  if(user.getUser_permission()==1){
             performances=performanceService.getPerformanceByTLName(user);
             List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
             model.addAttribute("performanceInfos",performanceInfos);
+            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+" 条数据";
+            model.addAttribute("performanceSize",performanceInfoSize);
             return "adminpage";
         } else if(user.getUser_permission()==2){
             //查看到自己组的数据信息
@@ -201,12 +234,16 @@ public class PageController {
             List<TMPerformance> tmPerformances=tmPerformanceService.getAllTMPerformanceInf();
             List<TMPerformanceInfo> tmPerformanceInfos= tmPerformanceService.changeTMPerformance(tmPerformances);
             model.addAttribute("tmPerformanceInfos",tmPerformanceInfos);
+            String tmPerformanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+tmPerformanceInfos.size()+" 条数据";
+            model.addAttribute("tmPerformanceSize",tmPerformanceInfoSize);
             return "allTMInfoPage";
         }else if(user.getUser_permission()==1){
             //权限为1时候获得的本组TM信息
             List<TMPerformance> tmPerformances=tmPerformanceService.getTMPerformanceByTLName(user);
             List<TMPerformanceInfo> tmPerformanceInfos=  tmPerformanceService.changeTMPerformance(tmPerformances);
             model.addAttribute("tmPerformanceInfos",tmPerformanceInfos);
+            String tmPerformanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+tmPerformanceInfos.size()+"条数据";
+            model.addAttribute("tmPerformanceSize",tmPerformanceInfoSize);
             return "allTMInfoPage";
         } else if(user.getUser_permission()==2){
             //查看到自己的数据信息
@@ -222,5 +259,58 @@ public class PageController {
         }
         model.addAttribute("performanceInfos",null);
         return "emplist";
+    }
+
+
+
+    @RequestMapping(value = "/admin/showPerInfoByLikeNameH",method = RequestMethod.GET)
+    public  String showP(Model model,@RequestParam String userName,@RequestParam String textTMByName
+                         ,@RequestParam String textByTLName,
+                         HttpServletRequest request){
+        CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
+
+        //用户名称模糊查询出 数据
+        List<Performance> performances= performanceService.getPerformanceByLikeName(userName.trim(),textTMByName.trim(),textByTLName.trim());
+        //转换成实体
+        List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
+        //拉去一共多少条数
+        String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+"条数据";
+        model.addAttribute("performanceSize",performanceInfoSize);
+        model.addAttribute("performanceInfos",performanceInfos);
+        //局部刷新使用
+        return "adminpage::content";
+    }
+
+    @RequestMapping(value = "/admin/showPerInfoByLikeNameOrTLName",method = RequestMethod.GET)
+    public  String showTMP(Model model,@RequestParam String likeName,@RequestParam String likeTLName,HttpServletRequest request){
+        CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
+
+        List<TMPerformance> tmPerformances=tmPerformanceService.getTMPerformanceByLikeNameOrTMName(likeName.trim(),likeTLName.trim());
+        //转换成实体
+        List<TMPerformanceInfo> tmPerformanceInfos=tmPerformanceService.changeTMPerformance(tmPerformances);
+        //拉去一共多少条数
+        String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+tmPerformanceInfos.size()+"条数据";
+        model.addAttribute("tmPerformanceSize",performanceInfoSize);
+        model.addAttribute("tmPerformanceInfos",tmPerformanceInfos);
+        //局部刷新使用
+        return "allTMInfoPage::content";
+    }
+
+    @RequestMapping(value = "/fruit/detail")
+    public String detail(Model model,int id) {
+        List<Fruit> fruits = new ArrayList<>();
+        if(id == 0) {
+            String[] strings={"香蕉","苹果","凤梨","西瓜"};
+            for(int i = 1; i <= strings.length; i++) {
+                fruits.add(new Fruit(i,strings[i-1]));
+            }
+        } else if(id == 1) {
+            String[] strings={"菠萝","草莓","西红柿","黑莓","百香果","葡萄"};
+            for(int i = 1; i <= strings.length; i++) {
+                fruits.add(new Fruit(i,strings[i-1]));
+            }
+        }
+        model.addAttribute("fruits",fruits);
+        return "Thyleaf";
     }
 }

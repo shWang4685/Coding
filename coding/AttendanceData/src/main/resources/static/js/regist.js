@@ -38,7 +38,7 @@ function userName_onblur(){
 		tipObj.innerHTML=""
 	}else{
 		userName=false;
-		tipObj.innerHTML="密码不能含有非法字符，长度在3-10之间"
+		tipObj.innerHTML="用户名不能含有非法字符，长度在3-10之间"
 	}
 }
 //真实姓名验证

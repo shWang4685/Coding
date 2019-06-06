@@ -62,21 +62,29 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			session.setAttribute(Constants.SessionKey.USER, userInfo);
 		}*/
 		if(users==null){
-			/*log.info("尚未登录，跳转到登录界面");
-			response.sendRedirect(request.getContextPath()+"signin");*/
-			
 			String requestType = request.getHeader("X-Requested-With");
-//			System.out.println(requestType);
 			if(requestType!=null && requestType.equals("XMLHttpRequest")){
 				response.setHeader("sessionstatus","timeout");
-//				response.setHeader("basePath",request.getContextPath());
 				response.getWriter().print("LoginTimeout");
 				return false;
 			} else {
 				log.info("尚未登录，跳转到登录界面");
-				response.sendRedirect(request.getContextPath()+"login");
+				response.sendRedirect("http://192.168.71.211:8888/login");
 			}
 			return false;
+		}else {
+			//拦截admin下的请求，如果权限等级为0/1 正常，如果权限等级为2/3返回到getAllEmp 请求
+			String indexStr=request.getRequestURI().substring(request.getContextPath().indexOf("/")+1);
+			if(indexStr.indexOf("admin")!=-1){
+				if(users.getUser_permission()==2){
+					response.sendRedirect("http://192.168.71.211:8888/getAllEmp");
+					return false;
+				}else if(users.getUser_permission()==3){
+					response.sendRedirect("http://192.168.71.211:8888/getAllEmp");
+					return false;
+				}
+			}
+
 		}
 //		log.info("用户已登录,userName:"+userInfo.getSysUser().getUserName());
 		return true;
@@ -100,9 +108,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		notLoginPaths.add("/registActivation");
 		notLoginPaths.add("/registSucess");
 		notLoginPaths.add("/registFail");
+
 		notLoginPaths.add("/uploadfile");
 		notLoginPaths.add("/upload");
-		//notLoginPaths.add("/insertUserByExcel");
+		notLoginPaths.add("/insertUserByExcel");
+		notLoginPaths.add("/fruit/detail");
+		notLoginPaths.add("/Thyleaf");
 
 
 		//notLoginPaths.add("/tmpage");

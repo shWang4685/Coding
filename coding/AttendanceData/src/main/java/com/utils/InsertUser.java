@@ -35,7 +35,7 @@ public class InsertUser {
     public String getAllAttPersonnel(){
         System.out.println("进来了啦");
         String str="";
-        List<CompanyUser> companyUsers=readerUserExel("C:\\Users\\24431\\company\\coding\\AttendanceData\\src\\main\\resources\\file\\账号.xlsx",0);
+        List<CompanyUser> companyUsers=readerUserExel("C:\\Users\\24431\\company\\coding\\AttendanceData\\src\\main\\resources\\file\\账号-最新.xlsx",0);
         System.out.println(companyUsers.size());
         for(CompanyUser c:companyUsers){
             int num=companyUserDao.insertCompanyUser(c);
@@ -81,7 +81,8 @@ public class InsertUser {
                     companyUser.setUser_name(GetCellValue(type0));
 
                     Cell type1=row.getCell(1);
-                    companyUser.setUser_id(Integer.parseInt(GetCellValue(type1)));
+                    String idStr=GetCellValue(type1).toLowerCase();
+                    companyUser.setUser_id(Integer.parseInt(idStr.substring(idStr.indexOf("p")+1)));
 
 
                     Cell type2=row.getCell(2);

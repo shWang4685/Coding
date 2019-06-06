@@ -3,6 +3,8 @@ package com.dao;
 import com.entity.CompanyUser;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CompanyUserDao {
     CompanyUser checkUser(CompanyUser user);
@@ -12,4 +14,5 @@ public interface CompanyUserDao {
     int insertCompanyUser(CompanyUser companyUser);
     CompanyUser selectCompanyUserByEmail(String user_email);
     int updataCompanyUserStateByCode(String user_code);
+
 }

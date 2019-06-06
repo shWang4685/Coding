@@ -55,7 +55,8 @@ public class ExcelCSDN {
                 try{
 
                     Cell type0=row.getCell(0);//ID
-                    performance.setPfe_user_id(Integer.parseInt(GetCellValue(type0)));
+                    String idStr=GetCellValue(type0).substring(GetCellValue(type0).toLowerCase().indexOf("p")+1);
+                    performance.setPfe_user_id(Integer.parseInt(idStr));
 
                     Cell type1=row.getCell(3);
                     performance.setPfe_rating(GetCellValue(type1));//'评级',
@@ -119,6 +120,12 @@ public class ExcelCSDN {
                     performance.setPfe_originalData(pfe_originalData);
                     Cell type23=row.getCell(25);//季度
                     performance.setPfe_quarter(Integer.parseInt(GetCellValue(type23)));
+                    if(row.getCell(26)==null){
+                        performance.setPfe_tlComment("无");//备注
+                    }else {
+                        performance.setPfe_tlComment(GetCellValue(row.getCell(26)));//备注
+                    }
+
                     performanceList.add(performance);
                 }catch(NullPointerException e){
                     e.printStackTrace();
@@ -159,13 +166,13 @@ public class ExcelCSDN {
                 }
                 TMPerformance tmPerformance=new TMPerformance();
                 Cell type0=row.getCell(0);//ID
-                tmPerformance.setTmpfe_user_id(Integer.parseInt(GetCellValue(type0)));
+                String idStr=GetCellValue(type0).toLowerCase();
+                tmPerformance.setTmpfe_user_id(Integer.parseInt(idStr.substring(idStr.indexOf("p")+1)));
                 Cell type1=row.getCell(3);//个人评级
                 tmPerformance.setTmpfe_rating(GetCellValue(type1));
                 Cell type2=row.getCell(4);//评语
                 if(type2==null){
                     tmPerformance.setTmpfe_tlComment("无");
-
                 }else {
                     tmPerformance.setTmpfe_tlComment(GetCellValue(type2));
                 }
@@ -193,20 +200,21 @@ public class ExcelCSDN {
                         GetCellValue(type11)+"/"+ GetCellValue(type12)+"/"+
                         GetCellValue(type13);
                 tmPerformance.setTmpfe_addPoint(addPoint);
-
                 //扣分项：
+
                 Cell type14=row.getCell(16);//个人迟到数>3
                 Cell type15=row.getCell(17);//团队人均迟到数>3
                 Cell type16=row.getCell(18);//团队个人日均有效BUG数<3
                 Cell type17=row.getCell(19);//BUG漏测
                 Cell type18=row.getCell(20);//客户投诉
                 Cell type19=row.getCell(21);//信息安全
+                Cell type22=row.getCell(24);//备注（特殊项加分/扣分）说明
                 String minusPoint=GetCellValue(type14)+"/"+
                         GetCellValue(type15)+"/"+
                         GetCellValue(type16)+"/"+
                         GetCellValue(type17)+"/"+
                         GetCellValue(type18)+"/"+
-                        GetCellValue(type19);
+                        GetCellValue(type19)+"/"+GetCellValue(type22);
                 tmPerformance.setTmpfe_minusPoint(minusPoint);
 
                 Cell type20=row.getCell(22);//个人迟到次数
@@ -215,30 +223,40 @@ public class ExcelCSDN {
                 tmPerformance.setTmpfe_leakage(GetCellValue(type21));
 
                 //团队数据
-                Cell type22=row.getCell(24);//团队名称
-                Cell type23=row.getCell(25);//有效BUG数
-                Cell type24=row.getCell(26);//人数
-                Cell type25=row.getCell(27);//自然工作日
-                Cell type26=row.getCell(28);//人平均有效BUG数
-                Cell type27=row.getCell(29);//是否获得双月团队人均有效BUG数排名奖励
-                Cell type28=row.getCell(30);//迟到总数
-                Cell type29=row.getCell(31);//迟到人均数
-                Cell type30=row.getCell(32);//团队漏测数
-                Cell type31=row.getCell(33);//团队是否漏测
-                Cell type32=row.getCell(34);//团队双月个人是否获得
-                Cell type33=row.getCell(35);//团队双月个人获得名单
-                String originalData=GetCellValue(type22)+"/"+
-                        GetCellValue(type23)+"/"+GetCellValue(type24)+"/"+
+                Cell type23=row.getCell(25);//团队名称
+                Cell type24=row.getCell(26);//有效BUG数
+                Cell type25=row.getCell(27);//人数
+                Cell type26=row.getCell(28);//自然工作日
+                Cell type27=row.getCell(29);//自然工作人天
+                Cell type28=row.getCell(30);//人平均有效BUG数
+                Cell type29=row.getCell(31);//是否获得双月团队人均有效BUG数排名奖励
+                Cell type30=row.getCell(32);//迟到总数
+                Cell type31=row.getCell(33);//迟到人均数
+                Cell type32=row.getCell(34);//团队漏测数
+                Cell type33=row.getCell(35);//团队是否漏测
+                Cell type34=row.getCell(36);//团队双月个人是否获得
+                Cell type35=row.getCell(37); // 团队双月个人获得名单
+                String originalData= GetCellValue(type23)+"/"+GetCellValue(type24)+"/"+
                         GetCellValue(type25)+"/"+GetCellValue(type26)+"/"+
                         GetCellValue(type27)+"/"+GetCellValue(type28)+"/"+
                         GetCellValue(type29)+"/"+GetCellValue(type30)+"/"+
                         GetCellValue(type31)+"/"+GetCellValue(type32)+"/"+
-                        GetCellValue(type33);
+                        GetCellValue(type33)+"/"+GetCellValue(type34)+"/"+
+                        GetCellValue(type35);
                 tmPerformance.setTmpfe_originalData(originalData);
+                Cell type36=row.getCell(38);//团队人姓名
+                tmPerformance.setTmpfe_teamAllName(GetCellValue(type36));
 
-                Cell type34=row.getCell(36);//季度
-                tmPerformance.setTmpfe_quarter(Integer.parseInt(GetCellValue(type34)));
 
+                Cell type37=row.getCell(39);//季度
+                tmPerformance.setTmpfe_quarter(Integer.parseInt(GetCellValue(type37)));
+                Cell type38=row.getCell(40);
+                if(type38==null){
+                    tmPerformance.setTmpfe_ctoComment("无");
+                }else {
+                    tmPerformance.setTmpfe_ctoComment(GetCellValue(type38));
+                }
+                System.out.println("name:--------"+tmPerformance.toString());
                 tmPerformanceList.add(tmPerformance);
             }
         }catch (IOException e){

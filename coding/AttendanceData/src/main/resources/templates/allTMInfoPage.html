@@ -21,173 +21,137 @@
 					</div>
 					<div>						
 					</div>
+					<div id ="navigation_top">
+					</div>
 					<div id="navigation">
-						<p>		
-						<div id="picker">选择文件</div>
-						<input id="ctlBtn" type="button"   class="btn btn-default" value="导入TM绩效" />
-						<input id="tmDataBtn" type="button" onclick="showEmp();"  class="btn btn-default" value="查看普通组员数据" />
+						<p id="whereami"></p>
+						<h1 style="color: #74A8F5">Welcome!</h1>
+						<h1 style="color: #74A8F5">您可在此页面查看下属TM的绩效信息</h1>
+						<div style="float: right;margin-top: -150px ">
+							<p style="margin-top: 40px;">
+							<div id="picker">选择文件</div>
+							<input id="ctlBtn" type="button"   class="btn btn-default" value="导入TM绩效" />
+							<input id="tmDataBtn" type="button" onclick="showEmp();"  class="btn btn-default" value="查看普通组员数据" />
+							<input id="inputTextName" type="text" style="margin-left: 1350px"  class="btn btn-default" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" placeholder="员工姓名查询" maxlength="15"/>
+							<input id="inputTextTLName" type="text" style="margin-left: 1350px"  class="btn btn-default" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" placeholder="所属TL姓名" maxlength="15"/>
+							<input id="checkBtn" type="button" onclick="checkBoxs();" class="btn btn-default" value="查询" />
 						</p>
+						</div>
 						<div id="thelist" class="uploader-list"></div>
 					</div>
 					
 				</div>
-				<div id="content">
-					<p id="whereami">
-					</p>
-					<h1>
-						Welcome!
-					</h1>
-					<h1>
-						您可在此页面查看下属TM的绩效信息
-					</h1>
+				<div style="width: 1750px;height: 600px; overflow:scroll" >
+				<div id="content" th:fragment="content" >
 					<!--/*@thymesVar id="user" type="com.entity.User"*/-->
-					<table class="table">
-						<tr class="table_header">
-							<td style="width: 50px">
-								姓名
-							</td>
-							<td>
-								TL
-							</td>
-							<td>
-								个人评级
-							</td>
-							<td>
-								评语
-							</td>
-							<td>
-								个人考核总得分
-							</td>
-							<td>
-								TL评分(30)
-							</td>
-							<td>
-								CTO评分(10)
-							</td>
-							<td>
-								全勤(3)
-							</td>
-							<td>
-								培训讲师(3-5)
-							</td>
-							<td>
-								团队无漏测(3)
-							</td>
-							<td>
-								团队个人日均有效BUG数 大于 3(3)
-							</td>
-							<td>
-								团队有人获得个人有效BUG数排名奖励(3)
-							</td>
-							<td>
-								获得团队人均有效BUG数排名奖励(5)
-							</td>
-							<td>
-								对项目有较大贡献(1-15)
-
-							</td>
-							<td>
-								客户表扬(1-20)
-
-							</td>
-							<td>
-								个人迟到数>3(-3)
-
-							</td>
-							<td>
-								团队人均迟到数大于3（-3）
-							</td>
-							<td>
-								团队个人日均有效BUG数小于3（-5）
-							</td>
-							<td>
-								BUG漏测
-								（-3-10）
-							</td>
-							<td>
-								客户投诉
-								（-3-20）
-							</td>
-							<td>
-								信息安全
-								（-30）
-							</td>
-							<td>
-								个人迟到次数
-							</td>
-							<td>
-								是否漏测
-							</td>
-							<td>
-								团队名称
-							</td>
-							<td>
-								团队有效BUG数
-							</td><td>
-							团队人数
-						</td>
-							<td>
-								自然工作日
-							</td>
-
-							<td>
-								人平均有效BUG数
-							</td>
-							<td>
-								是否获得双月团队人均有效BUG数排名奖励
-							</td>
-							<td>
-								迟到总数
-							</td><td>
-							迟到人均数
-						</td>
-							<td>
-								团队漏测数
-							</td>
-
-							<td>
-								团队是否漏测
-							</td>
-							<td>
-								团队双月个人是否获得
-							</td>
-							<td>
-								团队双月个人获得名单
+					<table class="table"  style="width: 5000px">
+						<tr >
+							<td th:text="${tmPerformanceSize}" width="100px" style="color: #74A8F5" colspan="7"></td>
+						</tr>
+						<tr>
+							<td colspan="37" >
 							</td>
 						</tr>
-						<tr class="row1" th:each="tmInfos:${tmPerformanceInfos}">
+						<tr class="table_header">
+							<td  style="text-align: center;width: 40px;" rowspan="2" >考核人员</td>
+							<td  style="text-align: center;width: 40px" rowspan="2" >TL姓名</td>
+							<td style="text-align: center;" rowspan="2">评级</td>
+							<td style="text-align: center;" rowspan="2">评语</td>
+							<td style="text-align: center;" rowspan="2">个人考核总得分</td>
+							<td style="text-align: center;" rowspan="2">TL评分[30]</td>
+							<td style="text-align: center;" rowspan="2">CTO评分[10]</td>
+							<td  class="td_admin_table_add" style="background-color: #CBD6DE" colspan="5">个人加分项</td>
+							<td  class="td_admin_table_add" style="background-color: #CBD6DE" colspan="3">团队加分项</td>
+							<td  class="td_admin_table_min" style="background-color: #f2dede" colspan="2">团队扣份项</td>
+							<td  class="td_admin_table_min" style="background-color: #f2dede" colspan="4">个人扣份项</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" colspan="2" >个人原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #f2dede" rowspan="2">备注（特殊项加分/扣分）说明</td>
+
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" colspan="11">团队原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" colspan="2">双月个人</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">团队人员姓名</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">季度</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">备注</td>
+						</tr>
+						<tr class="table_header" >
+							<!--个人加分-->
+							<td  class="td_admin_table_add">全勤[3]</td>
+							<td  class="td_admin_table_add">培训讲师[3-5]</td>
+							<td  class="td_admin_table_add">对项目有较大贡献[1-15]</td>
+							<td  class="td_admin_table_add">客户表扬[1-20]</td>
+							<td class="td_admin_table_add">团队无漏测[3]</td>
+							<!--团队加分项-->
+							<td class="td_admin_table_add">团队个人日均有效BUG数大于3[3]</td>
+							<td class="td_admin_table_add">团队有人获得个人有效BUG数排名奖励[3]</td>
+							<td class="td_admin_table_add">获得团队人均有效BUG数排名奖励[5]</td>
+							<!--团队扣分项-->
+							<td class="td_admin_table_min">团队人均迟到数大于3[3]</td>
+							<td class="td_admin_table_min">团队个人日均有效BUG数小于3[5]</td>
+							<!--个人扣分项-->
+							<td class="td_admin_table_min">个人迟到数大于3[3]</td>
+							<td class="td_admin_table_min">漏测[3~10]</td>
+							<td class="td_admin_table_min">客户投诉[3~20]</td>
+							<td class="td_admin_table_min">信息安全[30]</td>
+
+							<td class="td_admin_table_original">迟到次数</td>
+							<td class="td_admin_table_original">是否漏测</td>
+
+
+							<td class="td_admin_table_original">团队名称</td>
+							<td class="td_admin_table_original">有效BUG数</td>
+							<td class="td_admin_table_original">人数</td>
+							<td class="td_admin_table_original">工作日</td>
+							<td class="td_admin_table_original">自然工作人天</td>
+							<td class="td_admin_table_original">人日平均有效BUG数</td>
+							<td class="td_admin_table_original">是否获得双月团队人均有效BUG数排名奖励</td>
+							<td class="td_admin_table_original">迟到总数</td>
+							<td class="td_admin_table_original">迟到人均数</td>
+							<td class="td_admin_table_original">团队漏测数</td>
+							<td class="td_admin_table_original">团队是否漏测</td>
+							<td class="td_admin_table_original">团队双月个人是否获得</td>
+							<td class="td_admin_table_original">团队双月个人获得名单</td>
+						</tr>
+
+						<tr class="row1" style="text-align: center;" th:each="tmInfos:${tmPerformanceInfos}">
 							<td th:text="${tmInfos.tmpfe_user_name}"></td>
 							<td th:text="${tmInfos.tmpfe_tlName}"></td>
 							<td th:text="${tmInfos.tmpfe_rating}"></td>
-							<td th:text="${tmInfos.tmpfe_tlComment}"></td>
+							<td  style="text-align: left" th:text="${tmInfos.tmpfe_tlComment}"></td>
 							<td th:text="${tmInfos.tmpfe_totalScore}"></td>
 							<td th:text="${tmInfos.tmpfe_tlScore}"></td>
 							<td th:text="${tmInfos.tmpfe_ctoScore}"></td>
 
 							<td th:text="${tmInfos.tmpfe_fullAtt}"></td>
 							<td th:text="${tmInfos.tmpfe_lecturer}"></td>
+							<td th:text="${tmInfos.tmpfe_contribution}"></td>
+							<td th:text="${tmInfos.tmpfe_praise}"></td>
+
 							<td th:text="${tmInfos.tmpfe_noLeakageTeam}"></td>
 							<td th:text="${tmInfos.tmpfe_overValidBugTeam}"></td>
 							<td th:text="${tmInfos.tmpfe_bugRanking}"></td>
 							<td th:text="${tmInfos.tmpfe_bugAvgRanking}"></td>
-							<td th:text="${tmInfos.tmpfe_contribution}"></td>
-							<td th:text="${tmInfos.tmpfe_praise}"></td>
 
 
-							<td th:text="${tmInfos.tmpfe_tardiness}"></td>
+
+
 							<td th:text="${tmInfos.tmpfe_teamTardiness}"></td>
 							<td th:text="${tmInfos.tmpfe_lessValidBug}"></td>
+							<td th:text="${tmInfos.tmpfe_tardiness}"></td>
 							<td th:text="${tmInfos.tmpfe_leakage}"></td>
 							<td th:text="${tmInfos.tmpfe_complaint}"></td>
 							<td th:text="${tmInfos.tmpfe_InfoSafety}"></td>
 
 							<td th:text="${tmInfos.tmpfe_latenessNum}"></td>
 							<td th:text="${tmInfos.tmpfe_TMleakageBool}"></td>
+							<td th:text="${tmInfos.tmpfe_minusPointInfo}"></td>
+
 
 							<td th:text="${tmInfos.tmpfe_teamName}"></td>
 							<td th:text="${tmInfos.tmpfe_bugRankingNum}"></td>
 							<td th:text="${tmInfos.tmpfe_number}"></td>
 							<td th:text="${tmInfos.tmpfe_workingDay}"></td>
+							<td th:text="${tmInfos.tempfe_workingDayMan}"></td>
+
 							<td th:text="${tmInfos.tmpfe_bugAvgPer}"></td>
 							<td th:text="${tmInfos.tmpfe_dobMonthBugRanking}"></td>
 							<td th:text="${tmInfos.tmpfe_teamAlllatenessNum}"></td>
@@ -196,11 +160,16 @@
 							<td th:text="${tmInfos.tmpfe_teamLeakageBool}"></td>
 							<td th:text="${tmInfos.tmpfe_teamDobMonthRaward}"></td>
 							<td th:text="${tmInfos.tmpfe_teamDobMonthRawardName}"></td>
+							<td th:text="${tmInfos.tempf_userList}"></td>
+
+							<td th:text="${tmInfos.tmpfe_quarter}"></td>
+							<td style="text-align: left" th:text="${tmInfos.tmpfe_ctoComment}"></td>
 
 						</tr>
 
 					</table>
 
+				</div>
 				</div>
 			</div>
 			<div id="footer">
@@ -213,4 +182,5 @@
 	<script type="text/javascript" th:src="@{js/jquery-1.8.3.min.js}"></script>
 	<script type="text/javascript" th:src="@{js/webuploader.js}"></script>
 	<script type="text/javascript" th:src="@{js/tminfo_upload_file.js}"></script>
+	<script type="text/javascript" th:src="@{js/tmperInfopage.js}"></script>
 </html>

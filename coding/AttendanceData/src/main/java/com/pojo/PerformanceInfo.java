@@ -6,6 +6,7 @@ public class PerformanceInfo {
     private  int pfe_id ;//'绩效表ID-主键',
     private  int pfe_user_id ;//'员工ID',
     private  String pfe_user_name ;//'员工姓名',
+    private String pfe_tm_name;//TM姓名
     private String pfe_rating;//'评级',
     private String pfe_totalScore;//'考核总分',
     private String pfe_tmScore;//'TM评分',
@@ -37,6 +38,14 @@ public class PerformanceInfo {
     private int pfe_quarter;//'季度',
     public PerformanceInfo(){
 
+    }
+
+    public String getPfe_tm_name() {
+        return pfe_tm_name;
+    }
+
+    public void setPfe_tm_name(String pfe_tm_name) {
+        this.pfe_tm_name = pfe_tm_name;
     }
 
     public int getPfe_id() {

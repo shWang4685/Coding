@@ -18,97 +18,95 @@
 							<a href="#">文思海辉-员工绩效</a>
 						</h1>
 					</div>
+					<div id ="navigation_top">
+					</div>
 					<div id="navigation">
+						<h1 style="color: #74A8F5">Welcome!</h1>
 					</div>
 				</div>
-				<div id="content">
+				<div id="content" style="height: 400px; overflow-y:scroll">
 					<p id="whereami">
 					</p>
-					<h1>
-						Welcome!
-					</h1>
+
 					<!--/*@thymesVar id="user" type="com.entity.User"*/-->
 					<table class="table">
+						<tr class="table_header" style="width: 20px">
+							<td  style="text-align: center;width: 40px;height: 30px" rowspan="2">考核人员</td>
+							<td  style="text-align: center;width: 40px" rowspan="2" >TM姓名</td>
+							<td style="text-align: center;" rowspan="2">评级</td>
+							<td style="text-align: center;" rowspan="2">个人考核总分</td>
+							<td style="text-align: center;" rowspan="2">TM评语</td>
+							<td style="text-align: center;" rowspan="2">TM评分[30]</td>
+							<td style="text-align: center;" rowspan="2">TL评分[10]</td>
+							<td  class="td_admin_table_add" style="background-color: #CBD6DE" colspan="7">加分项</td>
+							<td  class="td_admin_table_min" style="background-color: #f2dede" colspan="5">扣份项</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" colspan="3">个人有效BUG数原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" >扣分项原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" >漏测原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">季度</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">备注（特殊项加分/扣分）</td>
+
+						</tr>
 						<tr class="table_header">
-							<td style="width: 50px">
-								姓名
+							<td class="td_admin_table_add">
+								全勤[3]
 							</td>
-							<td>
-								评级
+							<td class="td_admin_table_add">
+								培训讲师[3~5]
 							</td>
-							<td>
-								个人总分
+							<td class="td_admin_table_add">
+								无漏测[3]
 							</td>
-							<td>
-								TM评分
+							<td class="td_admin_table_add">
+								个人有效BUG数大于等于3[3]
 							</td>
-							<td>
-								TL评分
+							<td class="td_admin_table_add">
+								个人有效BUG数排名第一[5]
 							</td>
-							<td>
-								全勤(3)
+							<td class="td_admin_table_add">
+								对项目有较大贡献[1~15]
 							</td>
-							<td>
-								讲师(3-5)
+							<td class="td_admin_table_add">
+								客户表扬 [1~20]
 							</td>
-							<td>
-								无漏测(3)
+							<td class="td_admin_table_min">
+								个人迟到数大于3[3]
 							</td>
-							<td>
-								个人有效BUG数大于等于3(3)
+							<td class="td_admin_table_min">
+								个人有效BUG数小于[3]
 							</td>
-							<td>
-								个人有效BUG数排名第一奖励(5)
+							<td class="td_admin_table_min">
+								BUG漏测[3~10]
+							</td >
+							<td class="td_admin_table_min">
+								客户投诉[3~20]
 							</td>
-							<td>
-								对项目有较大贡献（1-15）
+							<td class="td_admin_table_min">
+								信息安全[30]
 							</td>
-							<td>
-								客户表扬 （1-20）
+							<td class="td_admin_table_original">
+								4月个人有效BUG总数
 							</td>
-							<td>
-								个人迟到数大于3（-3）
+							<td class="td_admin_table_original">
+								4月工作日
 							</td>
-							<td>
-								个人有效BUG数小于(-3)
-							</td>
-							<td>
-								BUG漏测
-								（-3-10）
-							</td>
-							<td>
-								客户投诉
-								（-3-20）
-							</td>
-							<td>
-								信息安全
-								（-30）
-							</td>
-							<td>
-								1-3月个人有效BUG总数
-							</td>
-							<td>
-								1-3月工作日
-							</td>
-							<td>
+							<td class="td_admin_table_original">
 								个人日均有效BUG数
 							</td>
-							<td>
+							<td class="td_admin_table_original">
 								个人迟到次数
 							</td>
-							<td>
+							<td class="td_admin_table_original">
 								是否漏测
 							</td>
-							<td>
-								备注（特殊项加分/扣分）说明
-							</td>
-
 						</tr>
 						
 						<tr class="row1" th:each="performanceInfo:${performanceInfos}">
 							<td th:text="${performanceInfo.pfe_user_name}"></td>
+							<td th:text="${performanceInfo.pfe_tm_name}"></td>
 							<td th:text="${performanceInfo.pfe_rating}"></td>
 							<td th:text="${performanceInfo.pfe_totalScore}"></td>
+							<td th:text="${performanceInfo.pfe_tmComment}"></td>
 							<td th:text="${performanceInfo.pfe_tmScore}"></td>
 							<td th:text="${performanceInfo.pfe_tlScore}"></td>
 
@@ -132,7 +130,8 @@
 							<td th:text="${performanceInfo.pfe_LatenessNum}"></td>
 							<td th:text="${performanceInfo.pfe_missing}"></td>
 
-							<td th:text="${performanceInfo.pfe_tmComment}"></td>
+							<td th:text="${performanceInfo.pfe_quarter}"></td>
+							<td th:text="${performanceInfo.pfe_tmComment}"  style="text-align: left;"></td>
 						</tr>
 					</table>
 

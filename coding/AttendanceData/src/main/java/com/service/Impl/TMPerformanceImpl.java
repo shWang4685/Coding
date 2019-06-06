@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -51,7 +52,11 @@ public class TMPerformanceImpl  implements TMPerformanceService {
 
     @Override
     public boolean addTMPerformance(TMPerformance tmPerformance) {
-        if(tmPerformanceDao.insertTMPerformance(tmPerformance)<0){
+        System.out.println("进来了");
+        System.out.println(tmPerformance.toString());
+        int temp= tmPerformanceDao.insertTMPerformance(tmPerformance);
+        System.out.println("temp:"+temp);
+        if(temp<0){
             return false;
         }else {
             return true;
@@ -136,6 +141,9 @@ public class TMPerformanceImpl  implements TMPerformanceService {
                 }else if(i==5){
                     //信息安全
                     tmPerformanceInfo.setTmpfe_InfoSafety(minusPoint[i]);
+                }else  if(i==6){
+                    //扣分说明
+                    tmPerformanceInfo.setTmpfe_minusPointInfo(minusPoint[i]);
                 }
             }
             //个人迟到数
@@ -158,32 +166,35 @@ public class TMPerformanceImpl  implements TMPerformanceService {
                     //工作日
                     tmPerformanceInfo.setTmpfe_workingDay(originalData[i]);
                 }else if(i==4){
+                    //自然工作人天
+                    tmPerformanceInfo.setTempfe_workingDayMan(originalData[i]);
+                }else if(i==5){
                     //人均Bug
                     tmPerformanceInfo.setTmpfe_bugAvgPer(originalData[i]);
-                }else if(i==5){
+                }else if(i==6){
                     ///是否获得双月团队人均有效BUG数排名奖励
                     tmPerformanceInfo.setTmpfe_dobMonthBugRanking(originalData[i]);
-                } else if(i==6){
+                } else if(i==7){
                     //迟到总数
                     tmPerformanceInfo.setTmpfe_teamAlllatenessNum(originalData[i]);
                 }
-                else if(i==7){
+                else if(i==8){
                     //迟到人均数
                     tmPerformanceInfo.setTmpfe_teamAlllatenessAvg(originalData[i]);
                 }
-                else if(i==8){
+                else if(i==9){
                     //团队漏测数
                     tmPerformanceInfo.setTmpfe_teamLeakageNum(originalData[i]);
                 }
-                else if(i==9){
+                else if(i==10){
                     ///团队是否漏测
                     tmPerformanceInfo.setTmpfe_teamLeakageBool(originalData[i]);
                 }
-                else if(i==10){
+                else if(i==11){
                     //团队双月个人是否获得奖
                     tmPerformanceInfo.setTmpfe_teamDobMonthRaward(originalData[i]);
                 }
-                else if(i==11){
+                else if(i==12){
                     //团队双月个人是否获得奖名单
                     tmPerformanceInfo.setTmpfe_teamDobMonthRawardName(originalData[i]);
                 }
@@ -194,11 +205,55 @@ public class TMPerformanceImpl  implements TMPerformanceService {
             tmPerformanceInfo.setTmpfe_tlComment(tmf.getTmpfe_tlComment());
             //季度
             tmPerformanceInfo.setTmpfe_quarter(tmf.getTmpfe_quarter());
+            //团队成员
+            tmPerformanceInfo.setTempf_userList(tmf.getTmpfe_teamAllName());
 
 
             tmPerformanceInfos.add(tmPerformanceInfo);
 
         }
         return tmPerformanceInfos;
+    }
+
+    /**
+     * 模糊查询，通过查询的名字和该名字的TL名字
+     * @param likeName
+     * @param TLName
+     * @return
+     */
+    @Override
+    public List<TMPerformance> getTMPerformanceByLikeNameOrTMName(String likeName, String TLName) {
+        HashMap<String,String> hashMap=new HashMap<String,String>();
+        hashMap.put("likeName",likeName);
+        hashMap.put("likeTLName",TLName);
+        return tmPerformanceDao.selectTMPerByNameOrTLName(hashMap);
+    }
+
+    /**
+     * 判断是否已经有该员工在当前季度的数据
+     * @return
+     */
+    @Override
+    public boolean checkTMPerformanceIsExist(TMPerformance tmPerformances) {
+        List<TMPerformance> tmPerformanceList=tmPerformanceDao.selectTMPerByIdAndQuarter(tmPerformances);
+        if(tmPerformanceList.size()>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 删除id为pfe_user_id/季度为：pfe_quarter的绩效数据，这里主要用在上传数据替换
+     * @return
+     */
+    @Override
+    public boolean deleteTMPerfomanceIsExist(TMPerformance tmPerformances) {
+       int temp= tmPerformanceDao.deleteTMPerByIdAndQuarter(tmPerformances);
+       if(temp>0){
+           return true;
+       }else {
+           return false;
+       }
     }
 }

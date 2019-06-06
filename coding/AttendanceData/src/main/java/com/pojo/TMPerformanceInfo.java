@@ -30,12 +30,13 @@ public class TMPerformanceInfo {
 
     private String tmpfe_latenessNum;//个人迟到次数
     private String tmpfe_TMleakageBool;//是否漏测
-
+    private String tmpfe_minusPointInfo;//扣分说明
 
     private String tmpfe_teamName;// 团队名称
     private String tmpfe_bugRankingNum;// '原始数据:有效bug总数
     private String tmpfe_number;// 团队人数
     private String tmpfe_workingDay;//工作日
+    private String tempfe_workingDayMan;//自然工作人天
     private String tmpfe_bugAvgPer;//人均Bug
     private String tmpfe_dobMonthBugRanking;//是否获得双月团队人均有效BUG数排名奖励
 
@@ -49,12 +50,36 @@ public class TMPerformanceInfo {
 
     private String tmpfe_ctoComment ;// 'CTO评语',
     private String tmpfe_tlComment ;// 'TL评语'
-
+    private  String tempf_userList;//团队人员姓名
     private int tmpfe_quarter;//'季度',
 
 
     public TMPerformanceInfo(){
 
+    }
+
+    public String getTmpfe_minusPointInfo() {
+        return tmpfe_minusPointInfo;
+    }
+
+    public void setTmpfe_minusPointInfo(String tmpfe_minusPointInfo) {
+        this.tmpfe_minusPointInfo = tmpfe_minusPointInfo;
+    }
+
+    public String getTempfe_workingDayMan() {
+        return tempfe_workingDayMan;
+    }
+
+    public void setTempfe_workingDayMan(String tempfe_workingDayMan) {
+        this.tempfe_workingDayMan = tempfe_workingDayMan;
+    }
+
+    public String getTempf_userList() {
+        return tempf_userList;
+    }
+
+    public void setTempf_userList(String tempf_userList) {
+        this.tempf_userList = tempf_userList;
     }
 
     public int getTmpfe_id() {
@@ -399,10 +424,12 @@ public class TMPerformanceInfo {
                 Objects.equals(tmpfe_InfoSafety, that.tmpfe_InfoSafety) &&
                 Objects.equals(tmpfe_latenessNum, that.tmpfe_latenessNum) &&
                 Objects.equals(tmpfe_TMleakageBool, that.tmpfe_TMleakageBool) &&
+                Objects.equals(tmpfe_minusPointInfo, that.tmpfe_minusPointInfo) &&
                 Objects.equals(tmpfe_teamName, that.tmpfe_teamName) &&
                 Objects.equals(tmpfe_bugRankingNum, that.tmpfe_bugRankingNum) &&
                 Objects.equals(tmpfe_number, that.tmpfe_number) &&
                 Objects.equals(tmpfe_workingDay, that.tmpfe_workingDay) &&
+                Objects.equals(tempfe_workingDayMan, that.tempfe_workingDayMan) &&
                 Objects.equals(tmpfe_bugAvgPer, that.tmpfe_bugAvgPer) &&
                 Objects.equals(tmpfe_dobMonthBugRanking, that.tmpfe_dobMonthBugRanking) &&
                 Objects.equals(tmpfe_teamAlllatenessNum, that.tmpfe_teamAlllatenessNum) &&
@@ -412,13 +439,14 @@ public class TMPerformanceInfo {
                 Objects.equals(tmpfe_teamDobMonthRaward, that.tmpfe_teamDobMonthRaward) &&
                 Objects.equals(tmpfe_teamDobMonthRawardName, that.tmpfe_teamDobMonthRawardName) &&
                 Objects.equals(tmpfe_ctoComment, that.tmpfe_ctoComment) &&
-                Objects.equals(tmpfe_tlComment, that.tmpfe_tlComment);
+                Objects.equals(tmpfe_tlComment, that.tmpfe_tlComment) &&
+                Objects.equals(tempf_userList, that.tempf_userList);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(tmpfe_id, tmpfe_user_id, tmpfe_user_name, tmpfe_tlName, tmpfe_rating, tmpfe_totalScore, tmpfe_ctoScore, tmpfe_tlScore, tmpfe_fullAtt, tmpfe_lecturer, tmpfe_noLeakageTeam, tmpfe_overValidBugTeam, tmpfe_bugRanking, tmpfe_bugAvgRanking, tmpfe_contribution, tmpfe_praise, tmpfe_tardiness, tmpfe_teamTardiness, tmpfe_lessValidBug, tmpfe_leakage, tmpfe_complaint, tmpfe_InfoSafety, tmpfe_latenessNum, tmpfe_TMleakageBool, tmpfe_teamName, tmpfe_bugRankingNum, tmpfe_number, tmpfe_workingDay, tmpfe_bugAvgPer, tmpfe_dobMonthBugRanking, tmpfe_teamAlllatenessNum, tmpfe_teamAlllatenessAvg, tmpfe_teamLeakageNum, tmpfe_teamLeakageBool, tmpfe_teamDobMonthRaward, tmpfe_teamDobMonthRawardName, tmpfe_ctoComment, tmpfe_tlComment, tmpfe_quarter);
+        return Objects.hash(tmpfe_id, tmpfe_user_id, tmpfe_user_name, tmpfe_tlName, tmpfe_rating, tmpfe_totalScore, tmpfe_ctoScore, tmpfe_tlScore, tmpfe_fullAtt, tmpfe_lecturer, tmpfe_noLeakageTeam, tmpfe_overValidBugTeam, tmpfe_bugRanking, tmpfe_bugAvgRanking, tmpfe_contribution, tmpfe_praise, tmpfe_tardiness, tmpfe_teamTardiness, tmpfe_lessValidBug, tmpfe_leakage, tmpfe_complaint, tmpfe_InfoSafety, tmpfe_latenessNum, tmpfe_TMleakageBool, tmpfe_minusPointInfo, tmpfe_teamName, tmpfe_bugRankingNum, tmpfe_number, tmpfe_workingDay, tempfe_workingDayMan, tmpfe_bugAvgPer, tmpfe_dobMonthBugRanking, tmpfe_teamAlllatenessNum, tmpfe_teamAlllatenessAvg, tmpfe_teamLeakageNum, tmpfe_teamLeakageBool, tmpfe_teamDobMonthRaward, tmpfe_teamDobMonthRawardName, tmpfe_ctoComment, tmpfe_tlComment, tempf_userList, tmpfe_quarter);
     }
 
     @Override
@@ -448,10 +476,12 @@ public class TMPerformanceInfo {
                 ", tmpfe_InfoSafety='" + tmpfe_InfoSafety + '\'' +
                 ", tmpfe_latenessNum='" + tmpfe_latenessNum + '\'' +
                 ", tmpfe_TMleakageBool='" + tmpfe_TMleakageBool + '\'' +
+                ", tmpfe_minusPointInfo='" + tmpfe_minusPointInfo + '\'' +
                 ", tmpfe_teamName='" + tmpfe_teamName + '\'' +
                 ", tmpfe_bugRankingNum='" + tmpfe_bugRankingNum + '\'' +
                 ", tmpfe_number='" + tmpfe_number + '\'' +
                 ", tmpfe_workingDay='" + tmpfe_workingDay + '\'' +
+                ", tempfe_workingDayMan='" + tempfe_workingDayMan + '\'' +
                 ", tmpfe_bugAvgPer='" + tmpfe_bugAvgPer + '\'' +
                 ", tmpfe_dobMonthBugRanking='" + tmpfe_dobMonthBugRanking + '\'' +
                 ", tmpfe_teamAlllatenessNum='" + tmpfe_teamAlllatenessNum + '\'' +
@@ -462,6 +492,7 @@ public class TMPerformanceInfo {
                 ", tmpfe_teamDobMonthRawardName='" + tmpfe_teamDobMonthRawardName + '\'' +
                 ", tmpfe_ctoComment='" + tmpfe_ctoComment + '\'' +
                 ", tmpfe_tlComment='" + tmpfe_tlComment + '\'' +
+                ", tempf_userList='" + tempf_userList + '\'' +
                 ", tmpfe_quarter=" + tmpfe_quarter +
                 '}';
     }

@@ -14,4 +14,7 @@ public interface TMPerformanceService {
     List<TMPerformance> getTMPerformanceByByUserId(CompanyUser user);
     boolean addTMPerformance(TMPerformance tmPerformance);
     List<TMPerformanceInfo> changeTMPerformance(List<TMPerformance> tmPerformances);
+    List<TMPerformance> getTMPerformanceByLikeNameOrTMName(String likeName,String TLName);
+    boolean checkTMPerformanceIsExist(TMPerformance tmPerformances);
+    boolean deleteTMPerfomanceIsExist(TMPerformance tmPerformances);
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Thyleaf</title>
+    <script type="text/javascript" th:src="@{js/jquery-1.8.3.min.js}" ></script>
+    <script>
+        function ceshi1() {
+            $('#fruit-list').load("/fruit/detail?id=0");
+        }
+        function ceshi2() {
+            $('#fruit-list').load("/fruit/detail?id=1");
+        }
+    </script>
+</head>
+<body>
+
+
+<div id="fruit-list" style="text-align: center;margin:0 auto;width: 900px" th:fragment="fruit-list">
+    <button onclick="ceshi1()">测试1</button>
+    <button onclick="ceshi2()">测试2</button>
+    <table width="100%" border="1" cellspacing="1" cellpadding="0">
+        <thead>
+        <th>ID</th>
+        <th>水果名</th>
+        </thead>
+        <tbody>
+        <tr th:each="fruit : ${fruits}">
+            <td th:text="${fruit.id}"></td>
+            <td th:text="${fruit.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

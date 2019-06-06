@@ -13,16 +13,13 @@
         <id column="tmpfe_tlScore" jdbcType="VARCHAR" property="tmpfe_tlScore"/>
         <id column="tmpfe_addPoint" jdbcType="VARCHAR" property="tmpfe_addPoint"/>
         <id column="tmpfe_minusPoint" jdbcType="VARCHAR" property="tmpfe_minusPoint"/>
-
         <id column="tmpfe_latenessNum" jdbcType="VARCHAR" property="tmpfe_latenessNum"/>
         <id column="tmpfe_leakage" jdbcType="VARCHAR" property="tmpfe_leakage"/>
         <id column="tmpfe_originalData" jdbcType="VARCHAR" property="tmpfe_originalData"/>
-
         <id column="tmpfe_ctoComment" jdbcType="VARCHAR" property="tmpfe_ctoComment"/>
         <id column="tmpfe_tlComment" jdbcType="VARCHAR" property="tmpfe_tlComment"/>
         <id column="tmpfe_quarter" jdbcType="INTEGER" property="tmpfe_quarter"/>
-
-
+        <id column="tmpfe_teamAllName" jdbcType="VARCHAR" property="tmpfe_teamAllName"></id>
     </resultMap>
 
     <!--  查询所有-->
@@ -38,6 +35,17 @@
         from  cpy_tm_performance
         where tmpfe_user_id in (select user_id from cpy_user where user_TM=#{user_TM});
     </select>
+    <select id="selectTMPerByIdAndQuarter" resultMap="BaseResultMap" parameterType="com.entity.TMPerformance">
+        select
+        *
+        from  cpy_tm_performance
+        where tmpfe_user_id=#{tmpfe_user_id} and tmpfe_quarter=#{tmpfe_quarter};
+    </select>
+
+    <!--删除该用户该季度的数据-->
+    <delete id="deleteTMPerByIdAndQuarter" parameterType="com.entity.TMPerformance">
+        delete from  cpy_tm_performance where tmpfe_user_id=#{tmpfe_user_id} and tmpfe_quarter=#{tmpfe_quarter};
+    </delete>
     <!--  查询TM是user_TL 的绩效-->
     <select id="getTMPerformanceByTLName"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
@@ -45,7 +53,11 @@
         from  cpy_tm_performance
         where tmpfe_user_id in (select user_id from cpy_user where user_TL=#{user_TL});
     </select>
-
+    <!--模糊查询，TL/TM名称-->
+    <select id="selectTMPerByNameOrTLName" resultMap="BaseResultMap" parameterType="hashmap">
+       select * from cpy_tm_performance where tmpfe_user_id in (select user_id from cpy_user  where user_name like CONCAT('%',#{likeName},'%')
+       and user_TL like CONCAT('%',#{likeTLName},'%'));
+    </select>
     <!--  通过员工id查询-->
     <select id="getTMPerformanceByByUserId"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
@@ -95,6 +107,9 @@
             <if test="tmpfe_quarter != null">
                 tmpfe_quarter,
             </if>
+            <if test="tmpfe_teamAllName!= null">
+                tmpfe_teamAllName
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="tmpfe_user_id != null">
@@ -134,8 +149,12 @@
                 #{tmpfe_tlComment,jdbcType=VARCHAR},
             </if>
             <if test="tmpfe_quarter != null">
-                #{tmpfe_quarter,jdbcType=INTEGER}
+                #{tmpfe_quarter,jdbcType=INTEGER},
             </if>
+            <if test="tmpfe_teamAllName != null">
+                #{tmpfe_teamAllName,jdbcType=VARCHAR}
+            </if>
+
         </trim>
     </insert>
 

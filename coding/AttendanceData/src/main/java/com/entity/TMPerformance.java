@@ -17,6 +17,7 @@ public class TMPerformance {
     private String tmpfe_ctoComment;//'cto评语',
     private String tmpfe_tlComment;// 'TL评语',
     private int tmpfe_quarter;//季度
+    private  String tmpfe_teamAllName;//团队人员姓名
 
 
     public  TMPerformance(){
@@ -135,31 +136,12 @@ public class TMPerformance {
         this.tmpfe_quarter = tmpfe_quarter;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TMPerformance that = (TMPerformance) o;
-        return tmpfe_id == that.tmpfe_id &&
-                tmpfe_user_id == that.tmpfe_user_id &&
-                tmpfe_quarter == that.tmpfe_quarter &&
-                Objects.equals(tmpfe_rating, that.tmpfe_rating) &&
-                Objects.equals(tmpfe_totalScore, that.tmpfe_totalScore) &&
-                Objects.equals(tmpfe_ctoScore, that.tmpfe_ctoScore) &&
-                Objects.equals(tmpfe_tlScore, that.tmpfe_tlScore) &&
-                Objects.equals(tmpfe_addPoint, that.tmpfe_addPoint) &&
-                Objects.equals(tmpfe_minusPoint, that.tmpfe_minusPoint) &&
-                Objects.equals(tmpfe_latenessNum, that.tmpfe_latenessNum) &&
-                Objects.equals(tmpfe_leakage, that.tmpfe_leakage) &&
-                Objects.equals(tmpfe_originalData, that.tmpfe_originalData) &&
-                Objects.equals(tmpfe_ctoComment, that.tmpfe_ctoComment) &&
-                Objects.equals(tmpfe_tlComment, that.tmpfe_tlComment);
+    public String getTmpfe_teamAllName() {
+        return tmpfe_teamAllName;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(tmpfe_id, tmpfe_user_id, tmpfe_rating, tmpfe_totalScore, tmpfe_ctoScore, tmpfe_tlScore, tmpfe_addPoint, tmpfe_minusPoint, tmpfe_latenessNum, tmpfe_leakage, tmpfe_originalData, tmpfe_ctoComment, tmpfe_tlComment, tmpfe_quarter);
+    public void setTmpfe_teamAllName(String tmpfe_teamAllName) {
+        this.tmpfe_teamAllName = tmpfe_teamAllName;
     }
 
     @Override
@@ -179,6 +161,35 @@ public class TMPerformance {
                 ", tmpfe_ctoComment='" + tmpfe_ctoComment + '\'' +
                 ", tmpfe_tlComment='" + tmpfe_tlComment + '\'' +
                 ", tmpfe_quarter=" + tmpfe_quarter +
+                ", tmpfe_teamAllName='" + tmpfe_teamAllName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TMPerformance that = (TMPerformance) o;
+        return tmpfe_id == that.tmpfe_id &&
+                tmpfe_user_id == that.tmpfe_user_id &&
+                tmpfe_quarter == that.tmpfe_quarter &&
+                Objects.equals(tmpfe_rating, that.tmpfe_rating) &&
+                Objects.equals(tmpfe_totalScore, that.tmpfe_totalScore) &&
+                Objects.equals(tmpfe_ctoScore, that.tmpfe_ctoScore) &&
+                Objects.equals(tmpfe_tlScore, that.tmpfe_tlScore) &&
+                Objects.equals(tmpfe_addPoint, that.tmpfe_addPoint) &&
+                Objects.equals(tmpfe_minusPoint, that.tmpfe_minusPoint) &&
+                Objects.equals(tmpfe_latenessNum, that.tmpfe_latenessNum) &&
+                Objects.equals(tmpfe_leakage, that.tmpfe_leakage) &&
+                Objects.equals(tmpfe_originalData, that.tmpfe_originalData) &&
+                Objects.equals(tmpfe_ctoComment, that.tmpfe_ctoComment) &&
+                Objects.equals(tmpfe_tlComment, that.tmpfe_tlComment) &&
+                Objects.equals(tmpfe_teamAllName, that.tmpfe_teamAllName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(tmpfe_id, tmpfe_user_id, tmpfe_rating, tmpfe_totalScore, tmpfe_ctoScore, tmpfe_tlScore, tmpfe_addPoint, tmpfe_minusPoint, tmpfe_latenessNum, tmpfe_leakage, tmpfe_originalData, tmpfe_ctoComment, tmpfe_tlComment, tmpfe_quarter, tmpfe_teamAllName);
     }
 }

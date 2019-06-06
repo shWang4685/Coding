@@ -41,7 +41,23 @@
         from  cpy_performance
         where pfe_user_id in (select user_id from cpy_user where user_TL=#{user_TL});
     </select>
-
+    <select id="selectLikeByName" resultMap="BaseResultMap" parameterType="hashmap">
+         select * from cpy_performance where pfe_user_id in (select user_id from cpy_user  where user_name like CONCAT('%',#{likeName},'%')
+         and user_TM like CONCAT('%',#{likeTMName},'%')
+         and user_TL like CONCAT('%',#{likeTLName},'%')
+         ) ;
+    </select>
+    <!--查询是否已经存在该员工该季度的绩效-->
+    <select id="selectPerByIdAndQuarter" resultMap="BaseResultMap" parameterType="com.entity.Performance">
+        select
+        *
+        from  cpy_performance
+        where pfe_user_id=#{pfe_user_id} and pfe_quarter=#{pfe_quarter};
+    </select>
+    <!--删除该用户该季度的数据-->
+    <delete id="deletePerByIdAndQuarter" parameterType="com.entity.Performance">
+        delete from  cpy_performance where pfe_user_id=#{pfe_user_id} and pfe_quarter=#{pfe_quarter};
+    </delete>
     <!--  通过员工id查询-->
     <select id="getPerformanceByByUserId"  resultMap="BaseResultMap" parameterType="com.entity.CompanyUser">
         select
@@ -49,6 +65,12 @@
         from  cpy_performance
         where pfe_user_id =#{user_id};
     </select>
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
+        select
+        *
+        from  cpy_performance  LIMIT #{offset},#{limit}
+    </select>
+
     <insert id="insertPerformance" useGeneratedKeys="true" keyProperty="pfe_id" parameterType="com.entity.Performance">
       INSERT INTO cpy_performance
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -122,5 +144,4 @@
             </if>
         </trim>
     </insert>
-
 </mapper>

@@ -4,13 +4,15 @@
 		<title>adminpage</title>
 		<link rel="stylesheet" type="text/css" th:href="@{css/webuploader.css}"/>
 		<link rel="stylesheet" th:href="@{css/emsList.css}"/>
+		<link rel="stylesheet" th:href="@{css/page_b.css}"/>
 		<script type="text/javascript" th:src="@{js/jquery-1.8.3.min.js}" ></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	</head>
+
 	<body>
 		
 		<div id="wrap">
-			<div id="top_content"> 
+			<div id="top_content">
 				<div id="header">
 					<div id="rightheader">
 					</div>
@@ -19,108 +21,116 @@
 							<a href="#">文思海辉</a>
 						</h1>
 					</div>
-					<div>						
+					<div id ="navigation_top">
 					</div>
-					<div id="navigation">
-						<p>		
-						<div id="picker">选择文件</div>
-						<input id="ctlBtn" type="button"   class="btn btn-default" value="导入普通组员绩效" />
-						<input id="tmDataBtn" type="button" onclick="showTMData();"  class="btn btn-default" value="查看TM数据" />
+					<div id="navigation" >
+						<p id="whereami">
 						</p>
+						<h1 style="color: #74A8F5">Welcome!</h1>
+						<h1 style="color: #74A8F5">您可在此页面查看下属普通员工的绩效</h1>
+						<div style="float: right;margin-top: -150px ">
+							<p style="margin-top: 40px;">
+							<div id="picker">选择文件</div>
+							<input id="ctlBtn" type="button"   class="btn btn-default" value="导入普通组员绩效" />
+							<input id="tmDataBtn" type="button" onclick="showTMData();"  class="btn btn-default" value="查看TM数据" />
+
+							<input id="textByName" type="text" style="margin-left: 1350px" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"   placeholder="员工姓名查询" maxlength="15"/>
+							<input id="textTMByName" type="text" style="margin-left: 1350px" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"   placeholder="TM姓名查询" maxlength="15"/>
+							<input id="textByTLName" type="text" style="margin-left: 1350px"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"  placeholder="TL姓名查询" maxlength="15"/>
+							<input id="checkBtn" type="button" onclick="checkPerByName();" class="btn btn-default" value="查询" />
+							</p>
+						</div>
 						<div id="thelist" class="uploader-list"></div>
 					</div>
 					
 				</div>
-				<div id="content">
-					<p id="whereami">
-					</p>
-					<h1>
-						Welcome!
-					</h1>
-					<h1>
-						您可在此页面查看下属普通员工的绩效
-					</h1>
+				<div style="width: 1750px;height: 600px; overflow:scroll" >
+
+				<div id="content" th:fragment="content" >
 					<!--/*@thymesVar id="user" type="com.entity.User"*/-->
-					<table class="table">
-						<tr class="table_header">
-							<td style="width: 50px">
-								姓名
-							</td>
-							<td>
-								评级
-							</td>
-							<td>
-								个人总分
-							</td>
-							<td>
-								TM评分
-							</td>
-							<td>
-								TL评分
-							</td>
-							<td>
-								全勤(3)
-							</td>
-							<td>
-								讲师(3-5)
-							</td>
-							<td>
-								无漏测(3)
-							</td>
-							<td>
-								个人有效BUG数大于等于3(3)
-							</td>
-							<td>
-								个人有效BUG数排名第一奖励(5)
-							</td>
-							<td>
-								对项目有较大贡献（1-15）
-							</td>
-							<td>
-								客户表扬 （1-20）
-							</td>
-							<td>
-								个人迟到数大于3（-3）
-							</td>
-							<td>
-								个人有效BUG数小于(-3)
-							</td>
-							<td>
-								BUG漏测
-								（-3-10）
-							</td>
-							<td>
-								客户投诉
-								（-3-20）
-							</td>
-							<td>
-								信息安全
-								（-30）
-							</td>
-							<td>
-								1-3月个人有效BUG总数
-							</td>
-							<td>
-								1-3月工作日
-							</td>
-							<td>
-								个人日均有效BUG数
-							</td>
-							<td>
-								个人迟到次数
-							</td>
-							<td>
-								是否漏测
-							</td>
-							<td>
-								备注（特殊项加分/扣分）说明
-							</td>
+					<table class="table" id="table_per">
+						<thead>
+						<tr>
+							<td th:text="${performanceSize}" width="100px" style="color: #74A8F5" colspan="7"></td>
+						</tr>
+						<tr class="table_header" style="width: 20px;" >
+							<td  style="text-align: center;width: 40px;height: 30px" rowspan="2">考核人员</td>
+							<td  style="text-align: center;width: 40px" rowspan="2" >TM姓名</td>
+							<td style="text-align: center;" rowspan="2">评级</td>
+							<td style="text-align: center;" rowspan="2">个人考核总分</td>
+							<td style="text-align: center;" rowspan="2">TM评语</td>
+							<td style="text-align: center;" rowspan="2">TM评分[30]</td>
+							<td style="text-align: center;" rowspan="2">TL评分[10]</td>
+							<td  class="td_admin_table_add" style="background-color: #CBD6DE" colspan="7">加分项</td>
+							<td  class="td_admin_table_min" style="background-color: #f2dede" colspan="5">扣份项</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" colspan="3">个人有效BUG数原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" >扣分项原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" >漏测原始数据</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">季度</td>
+							<td  class="td_admin_table_min" style="background-color: #b2dba1" rowspan="2">备注（特殊项加分/扣分）</td>
 
 						</tr>
-						<tr class="row1" th:each="performanceInfo:${performanceInfos}">
-							<td th:text="${performanceInfo.pfe_user_name}"></td>
+						<tr class="table_header">
+							<td class="td_admin_table_add">
+								全勤[3]
+							</td>
+							<td class="td_admin_table_add">
+								培训讲师[3~5]
+							</td>
+							<td class="td_admin_table_add">
+								无漏测[3]
+							</td>
+							<td class="td_admin_table_add">
+								个人有效BUG数大于等于3[3]
+							</td>
+							<td class="td_admin_table_add">
+								个人有效BUG数排名第一[5]
+							</td>
+							<td class="td_admin_table_add">
+								对项目有较大贡献[1~15]
+							</td>
+							<td class="td_admin_table_add">
+								客户表扬 [1~20]
+							</td>
+							<td class="td_admin_table_min">
+								个人迟到数大于3[3]
+							</td>
+							<td class="td_admin_table_min">
+								个人有效BUG数小于[3]
+							</td>
+							<td class="td_admin_table_min">
+								BUG漏测[3~10]
+							</td >
+							<td class="td_admin_table_min">
+								客户投诉[3~20]
+							</td>
+							<td class="td_admin_table_min">
+								信息安全[30]
+							</td>
+							<td class="td_admin_table_original">
+								4月个人有效BUG总数
+							</td>
+							<td class="td_admin_table_original">
+								4月工作日
+							</td>
+							<td class="td_admin_table_original">
+								个人日均有效BUG数
+							</td>
+							<td class="td_admin_table_original">
+								个人迟到次数
+							</td>
+							<td class="td_admin_table_original">
+								是否漏测
+							</td>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="row1" style="text-align: center;" th:each="performanceInfo:${performanceInfos}" id="per_info_tr">
+							<td  th:text="${performanceInfo.pfe_user_name}"></td>
+							<td th:text="${performanceInfo.pfe_tm_name}"></td>
 							<td th:text="${performanceInfo.pfe_rating}"></td>
 							<td th:text="${performanceInfo.pfe_totalScore}"></td>
+							<td style="text-align: left;" th:text="${performanceInfo.pfe_tmComment}"></td>
 							<td th:text="${performanceInfo.pfe_tmScore}"></td>
 							<td th:text="${performanceInfo.pfe_tlScore}"></td>
 
@@ -144,13 +154,15 @@
 							<td th:text="${performanceInfo.pfe_LatenessNum}"></td>
 							<td th:text="${performanceInfo.pfe_missing}"></td>
 
-
-							<td th:text="${performanceInfo.pfe_tmComment}"></td>
-
+							<td th:text="${performanceInfo.pfe_quarter}"></td>
+							<td th:text="${performanceInfo.pfe_tlComment}"  style="text-align: left;"></td>
 						</tr>
-
+						</tbody>
 					</table>
-
+					<div class="scott" id="scott"></div>
+					<span id="dqPage" hidden="hidden" class="disabled1 current">1</span>
+					<span id="pageCount" hidden="hidden" class="disabled1 current" th:text="${pageCount}"></span>
+				</div>
 				</div>
 			</div>
 			<div id="footer">
@@ -163,4 +175,6 @@
 	<script type="text/javascript" th:src="@{js/jquery-1.8.3.min.js}"></script>
 	<script type="text/javascript" th:src="@{js/webuploader.js}"></script>
 	<script type="text/javascript" th:src="@{js/upload_file.js}"></script>
+	<script type="text/javascript" th:src="@{js/adminpage.js}"></script>
+	<script type="text/javascript" th:src="@{js/adminpage/page_admin.js}"></script>
 </html>

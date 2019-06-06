@@ -11,8 +11,7 @@ var TMInfo=[
 		];
 var TLInfo=[ 
         {"TLName":"许袁滕"},
-		{"TLName":"哈哈"},
-		{"TLName":"嘻嘻"}
+		{"TLName":"赵松"},
 		];
 		
 
