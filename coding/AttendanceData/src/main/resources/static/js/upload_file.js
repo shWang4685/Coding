@@ -1,5 +1,6 @@
 // 文件上传
 jQuery(function() {
+    var urlConfig="http://"+ip[0].ipconfig;
     /*对于一些控件的初始化*/
     var $ = jQuery,
         //待上传的文件列表
@@ -23,7 +24,7 @@ jQuery(function() {
         // swf: BASE_URL + '/js/Uploader.swf',
 
         // 文件接收服务端。就是上传文件走的url
-        server: 'http://192.168.71.211:8888/uploadEmp',
+        server: urlConfig+"/uploadEmp",
 
         // 选择文件的按钮。可选。
         pick: '#picker',

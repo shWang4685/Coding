@@ -194,11 +194,8 @@ public class PerformanceImpl implements PerformanceService {
     public List<Performance> selectPerformanceByPage( PagePerformance pagePerformance) {
         HashMap<String,Integer> hashMap=new HashMap<String,Integer>();
 
-        System.out.println("offset:"+pagePerformance.getPageIndex());
-        System.out.println("limit:"+pagePerformance.getPageCount());
-
-        //开始值：页码+(页码-1)*limit
-        hashMap.put("offset",1+((pagePerformance.getPageIndex()-1)*pagePerformance.getPageCount()));
+        //开始值：0-limit--> (n-1)n   limit=9-->   0-9;10-19
+        hashMap.put("offset",(pagePerformance.getPageIndex()-1)*pagePerformance.getPageCount());
         hashMap.put("limit",pagePerformance.getPageCount());
         return performanceDao.selectByPage(hashMap);
     }

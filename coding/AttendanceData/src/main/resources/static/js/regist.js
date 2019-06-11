@@ -262,8 +262,9 @@ function actionRegitst(){
 
         var json={"RigistUserInfo":[{"jobnum":jobnum,"username":username,"password":password,"realname":realname,"TMSelect":TMSelect,"TLSelect":TLSelect,"email":email}]};
         var post={data:JSON.stringify(json)};//JSON.stringify(json)把json转化成字符串
+        var urlConfig="http://"+ip[0].ipconfig;
         $.ajax({
-            url:"http://192.168.71.211:8888/registAction",
+            url:urlConfig+"/registAction",
             dataType: "json",
             contentType: "application/json;charset=uft-8",
             type:"POST",//提交的方式
@@ -287,7 +288,7 @@ function actionRegitst(){
                     }
 				}else if(msg.code==101){
 					alert("注册提交，已经发送激活码链接到您的邮箱，请您前往邮箱激活！")
-                    window.location.href='http://192.168.71.211:8888/login';
+                    window.location.href=urlConfig+"/login";
                 }else{
                     alert(msg.code);
                     alert("sss")

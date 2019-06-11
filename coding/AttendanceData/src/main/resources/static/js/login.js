@@ -4,10 +4,12 @@
 		function actionCheck() {
             var userName=$("#inputName").val();
             var passwrod=$("#inputPass").val();
+            var urlConfig="http://"+ip[0].ipconfig+"/logindemo";
+
             var json={"CompanyUser":[{"user_account":userName, "user_password":passwrod}]};
             var post={data:JSON.stringify(json)};//JSON.stringify(json)把json转化成字符串
             $.ajax({
-                url:"http://192.168.71.211:8888/logindemo",
+                url:urlConfig,
                 dataType: "json",
                 contentType: "application/json;charset=uft-8",
                 type:"POST",//提交的方式

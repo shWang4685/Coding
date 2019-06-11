@@ -6,7 +6,7 @@ import java.util.Objects;
 public class PagePerformance {
     private  int  pageIndex;//点击的页码
     private List<PerformanceInfo> performanceInfoList;//数据返回值
-    private int pageCount=10;//每页的显示数
+    private int pageCount=15;//每页的显示数
 
 
     public  PagePerformance(){

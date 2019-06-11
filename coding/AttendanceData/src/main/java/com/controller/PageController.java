@@ -108,22 +108,31 @@ public class PageController {
         PagePerformance pagePerformance=new PagePerformance();
         CompanyUser user=(CompanyUser)request.getSession(false).getAttribute("CompanyUser");
         List<Performance> performances=null;
+        PagePerformance ppf=new PagePerformance();
+        ppf.setPageIndex(1);
         //如果权限等级为0那么存储所有的员工绩效
         //如果权限等级为1那么存储TL为xx的员工绩效
         //如果权限等级为2那么存储TM为xx的员工绩效
         //如果权限等级为3那么存储ID为xx的员工绩效
         if(user.getUser_permission()==0){
+            //一共能查出多少条数据
+            List<Performance> perfs=performanceService.getAllPerformanceInf();
+            List<PerformanceInfo> perfInfs=performanceService.changePerformance(perfs);
             //获得权限为0的账号显示信息
-            performances=performanceService.getAllPerformanceInf();
+           // performances=performanceService.getAllPerformanceInf();
+
+            performances=performanceService.selectPerformanceByPage(ppf);
             List<PerformanceInfo>  performanceInfos=performanceService.changePerformance(performances);
             model.addAttribute("performanceInfos",performanceInfos);
-            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+performanceInfos.size()+" 条数据";
+
+            //获得一共多少条数据
+            String performanceInfoSize="亲爱的 "+user.getUser_name()+"   您好！   "+"为您展示"+perfInfs.size()+" 条数据";
             model.addAttribute("performanceSize",performanceInfoSize);
+            //获得总共多少页（一共多少条数据%每页显示多少个）
             DecimalFormat df=new DecimalFormat("0.00");
-            int pageCount=performanceInfos.size()/ pagePerformance.getPageCount();
-            System.out.println(performanceInfos.size()/ pagePerformance.getPageCount());
+            int pageCount=perfInfs.size()/ pagePerformance.getPageCount();
             //61组数据，分7页而不是分6页
-            if(performanceInfos.size()% pagePerformance.getPageCount()!=0){
+            if(perfInfs.size()% pagePerformance.getPageCount()!=0){
                 model.addAttribute("pageCount",pageCount+1);
             }else {
                 model.addAttribute("pageCount",pageCount);

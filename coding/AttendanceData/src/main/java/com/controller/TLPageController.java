@@ -131,7 +131,6 @@ public class TLPageController {
         List<PerformanceInfo> performanceInfoList= performanceService.changePerformance(performanceList);
         //将数据存入PagePerformance 统一返回
         ppf.setPerformanceInfoList(performanceInfoList);
-        System.out.println("ppf:______"+ppf.toString());
         return ppf;
 
 //        //判断是否有该用户名称

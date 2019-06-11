@@ -19,5 +19,9 @@ function  checkPerByName() {
     var textTMByName=$('#textTMByName').val();
     var textByTLName=$('#textByTLName').val();
     var url="/admin/showPerInfoByLikeNameH"+"?userName="+textName+"&textTMByName="+textTMByName+"&textByTLName="+textByTLName;
-    $('#content').load(url);
+    if(textName==""&&textTMByName==""&&textByTLName==""){
+
+    }else {
+        $('#content').load(url);
+    }
 }

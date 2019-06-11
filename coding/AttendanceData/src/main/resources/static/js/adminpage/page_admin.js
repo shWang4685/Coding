@@ -1,9 +1,8 @@
+//首次加载页面进来显示的内容
 $(function() {
 		 	var dqPage = $("#dqPage").text();//得到当前页数
-            alert(dqPage);
 		 	dqPage = parseInt(dqPage);//得到的文本转成int
             var pageCount = $("#pageCount").text();//得到总页数
-            alert(pageCount);
             pageCount = parseInt(pageCount);
             
             var i = 1;
@@ -72,6 +71,8 @@ $(function() {
                                 item += "<a href='"+href+"' onclick='clikPage("+i+");'>"+i+"</a>";
                             }
                         }
+                        $('#scott').append(item);
+                        return;
                     }else{//当前页小于总页数，则最后一页后面跟...
                         for(i = dqPage-1; i <= dqPage+1; i++){//dqPage+1页后面...
                             if (i == dqPage) {
@@ -89,8 +90,8 @@ $(function() {
             }
 		 });
 
+//点击后要变更内容ajax
 function clikPage(index) {
-    alert("index:"+index);
 	var pageClickIndex=index;
     var pageCount = $("#pageCount").text();//得到总页数
     pageCount = parseInt(pageCount);
@@ -105,18 +106,14 @@ function clikPage(index) {
         type:"POST",//提交的方式
         data: post.data,
         success: function success(ppf) {
-            var i = 1;
+            var i = 0;
             i = parseInt(i);
-            alert("size:"+ppf.performanceInfoList.length);
-            alert("text:"+ppf.performanceInfoList);
             if(ppf.performanceInfoList!=null){
                 $("#table_per tbody").html("");
                 var temp="";
-
                 for(i;i<ppf.performanceInfoList.length;i++){
                     var performanceInfo=ppf.performanceInfoList[i];
                     temp+="<tr class='row1' style='text-align: center;' id='per_info_tr'>";
-                   // alert(ppf.performanceInfoList[i].pfe_user_name);
                     var name=ppf.performanceInfoList[i].pfe_user_name;
 
                     temp+="<td>"+performanceInfo.pfe_user_name+"</td>"
@@ -151,7 +148,6 @@ function clikPage(index) {
                     temp+="</tr>"
                 }
                 $("#table_per tbody").append(temp);
-
                 $("#scott").html("");
                 pageDiv(pageClickIndex);
 
@@ -165,11 +161,10 @@ function clikPage(index) {
 	});
 }
 
+//变更页码
 function  pageDiv(dqPage) {
-    alert(dqPage);
     dqPage = parseInt(dqPage);//得到的文本转成int
     var pageCount = $("#pageCount").text();//得到总页数
-    alert(pageCount);
     pageCount = parseInt(pageCount);
     var i = 1;
     i = parseInt(i);
@@ -184,7 +179,6 @@ function  pageDiv(dqPage) {
             }else{
                 item+="<a href='"+href+"' onclick='clikPage("+i+");' >"+i+"</a>";
             }
-
         }
         item+="<a href='"+href+i+"' > > </a>"
         $('#scott').append(item);
@@ -219,7 +213,7 @@ function  pageDiv(dqPage) {
             item += "<span> . . . </span>";//2页码后面用...代替部分未显示的页码
             //当前页+1等于总页码
             if(dqPage+1 == pageCount){
-                for(i = dqPage-1; i <= pageCount; i++){
+                for(i = dqPage-1; i < pageCount; i++){
                     //“...”后面跟三个页码当前页居中显示
                     if (i == dqPage) {
                         item += "<span class='thisclass'>"+i+"</span>";
@@ -227,6 +221,9 @@ function  pageDiv(dqPage) {
                         item += "<a href='"+href+"' onclick='clikPage("+i+");'>"+i+"</a>";
                     }
                 }
+                item+="<a href='"+href+i+"' > > </a>"
+                $('#scott').append(item);
+                return;
             }else if (dqPage == pageCount) {
                 //当前页数等于总页数则是最后一页页码显示在最后
                 for(i = dqPage-2; i <= pageCount; i++){
@@ -237,6 +234,8 @@ function  pageDiv(dqPage) {
                         item += "<a href='"+href+"' onclick='clikPage("+i+");'>"+i+"</a>";
                     }
                 }
+                $('#scott').append(item);
+                return;
             }else{//当前页小于总页数，则最后一页后面跟...
                 for(i = dqPage-1; i <= dqPage+1; i++){//dqPage+1页后面...
                     if (i == dqPage) {
